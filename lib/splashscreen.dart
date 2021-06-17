@@ -9,7 +9,7 @@ class splash_screen extends StatelessWidget {
     return Scaffold(
       body: Container(
         child: Center(
-          child: Text("Welcome"),
+          child: Text("Welcome To eSportzzz"),
         ),
       ),
     );
