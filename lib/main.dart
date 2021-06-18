@@ -12,12 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'eSportzzz',
-      //debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       // theme: ThemeData(
       //   primarySwatch: Colors.blue,
       //   visualDensity: VisualDensity.adaptivePlatformDensity,
       // ),
-      home: new homepage(),
+      home: new HomePage(),
     );
   }
 }
