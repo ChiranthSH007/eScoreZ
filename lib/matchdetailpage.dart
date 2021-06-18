@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
-  final Match match;
-  DetailPage(this.match);
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -11,11 +9,23 @@ class DetailPage extends StatelessWidget {
         color: new Color(0xFF736AB7),
         child: new Stack(
           children: [
+            _getBackground(),
             _getGradient(),
             _getContent(),
           ],
         ),
       ),
+    );
+  }
+
+  Container _getBackground() {
+    return new Container(
+      child: new Image.network(
+        "lib/assets/img/valorant.png",
+        fit: BoxFit.cover,
+        height: 300.0,
+      ),
+      constraints: new BoxConstraints.expand(height: 300.0),
     );
   }
 
