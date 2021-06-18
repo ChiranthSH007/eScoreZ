@@ -1,3 +1,4 @@
+import 'package:esportzzz/homepage.dart';
 import 'package:esportzzz/splashscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'eSportzzz',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: splash_screen(),
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blue,
+      //   visualDensity: VisualDensity.adaptivePlatformDensity,
+      // ),
+      home: homepage(),
     );
   }
 }
