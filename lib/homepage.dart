@@ -1,22 +1,32 @@
-import 'package:esportzzz/HomePageBody.dart';
+import 'package:esportzzz/MatchRow.dart';
 import 'package:esportzzz/appbar.dart';
 import 'package:flutter/material.dart';
 
-class homepage extends StatelessWidget {
-  const homepage({Key? key}) : super(key: key);
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Column(
-        children: <Widget>[
-          new GradientAppBar("eSportzzz"),
-          new HomePageBody(),
-          new HomePageBody(),
-          new HomePageBody(),
-          new HomePageBody(),
-        ],
-      ),
+      body: new HomePageBody(),
+    );
+  }
+}
+
+class HomePageBody extends StatefulWidget {
+  @override
+  _HomePageBodyState createState() => new _HomePageBodyState();
+}
+
+class _HomePageBodyState extends State<HomePageBody> {
+  @override
+  Widget build(BuildContext context) {
+    return new Column(
+      children: <Widget>[
+        new GradientAppBar("treva"),
+        new MatchRow(),
+        new MatchRow(),
+        new MatchRow(),
+        new MatchRow(),
+      ],
     );
   }
 }
