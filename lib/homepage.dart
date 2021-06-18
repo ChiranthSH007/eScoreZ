@@ -1,3 +1,4 @@
+import 'package:esportzzz/HomePageBody.dart';
 import 'package:flutter/material.dart';
 
 class homepage extends StatelessWidget {
@@ -7,7 +8,9 @@ class homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: new Column(
-      children: [],
+      children: <Widget>[
+        new HomePageBody(),
+      ],
     ));
   }
 }
