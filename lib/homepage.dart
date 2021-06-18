@@ -21,7 +21,7 @@ class _HomePageBodyState extends State<HomePageBody> {
   Widget build(BuildContext context) {
     return new Column(
       children: <Widget>[
-        new GradientAppBar("treva"),
+        new GradientAppBar("eSportzzz"),
         new MatchRow(),
         new MatchRow(),
         new MatchRow(),
