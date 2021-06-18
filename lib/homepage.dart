@@ -8,11 +8,15 @@ class homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        body: new Column(
-      children: <Widget>[
-        new GradientAppBar("eSportzzz"),
-        new HomePageBody(),
-      ],
-    ));
+      body: new Column(
+        children: <Widget>[
+          new GradientAppBar("eSportzzz"),
+          new HomePageBody(),
+          new HomePageBody(),
+          new HomePageBody(),
+          new HomePageBody(),
+        ],
+      ),
+    );
   }
 }
