@@ -6,6 +6,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: new Color.fromARGB(255, 62, 58, 99),
       body: new HomePageBody(),
     );
   }
