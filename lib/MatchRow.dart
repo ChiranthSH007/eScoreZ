@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 class MatchRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     final matchCardContent = new Container(
       margin: new EdgeInsets.fromLTRB(100.0, 16.0, 16.0, 16.0),
       constraints: new BoxConstraints.expand(),
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          new Container(height: 4.0),
+          new Container(height: size.height * 0.002),
           new Text(
             "Valorant",
             style: TextStyle(
@@ -59,8 +60,8 @@ class MatchRow extends StatelessWidget {
       ),
     );
 
-    final matchThumbnailleft = new Container(
-      margin: new EdgeInsets.only(left: 0.0, top: 16.0),
+    final matchThumbnailLeft = new Container(
+      margin: new EdgeInsets.only(left: 0, top: 16),
       alignment: FractionalOffset(0.0, 0.0),
       child: new Image(
         image: new AssetImage("lib/assets/img/mars.png"),
@@ -68,9 +69,10 @@ class MatchRow extends StatelessWidget {
         width: 92.0,
       ),
     );
-    final matchThumbnailright = new Container(
-      margin: new EdgeInsets.only(top: 16.0, right: 25.0),
-      alignment: FractionalOffset(1.1, 0.0),
+
+    final matchThumbnailRight = new Container(
+      margin: new EdgeInsets.only(right: 25, top: 16),
+      alignment: FractionalOffset(1.1, 0),
       child: new Image(
         image: new AssetImage("lib/assets/img/mars.png"),
         height: 92.0,
@@ -97,13 +99,12 @@ class MatchRow extends StatelessWidget {
     );
 
     return new Container(
-        margin: const EdgeInsets.only(
-            left: 20.0, right: 30.0, top: 13.0, bottom: 13.0),
+        margin: const EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 10),
         child: new Stack(
           children: <Widget>[
             matchCard,
-            matchThumbnailleft,
-            matchThumbnailright
+            matchThumbnailLeft,
+            matchThumbnailRight
           ],
         ));
   }

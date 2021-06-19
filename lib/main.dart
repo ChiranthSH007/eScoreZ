@@ -1,4 +1,5 @@
 import 'package:esportzzz/homepage.dart';
+import 'package:esportzzz/matchdetailpage.dart';
 import 'package:esportzzz/splashscreen.dart';
 import 'package:flutter/material.dart';
 
