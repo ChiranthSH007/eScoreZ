@@ -52,17 +52,17 @@ class MatchRow extends StatelessWidget {
                 style: TextStyle(
                     fontFamily: 'Poppins',
                     color: Color(0xffb6b2df),
-                    fontSize: size.width * 0.04,
+                    fontSize: size.width * 0.029,
                     fontWeight: FontWeight.w400),
               ),
-              new Container(width: size.width * 0.017),
-              new Container(width: size.width * 0.2),
+              new Container(width: size.width * 0.080),
+              new Container(width: size.width * 0.012),
               new Text(
                 "10",
                 style: TextStyle(
                     fontFamily: 'Poppins',
                     color: Color(0xffb6b2df),
-                    fontSize: size.width * 0.04,
+                    fontSize: size.width * 0.029,
                     fontWeight: FontWeight.w400),
               ),
             ],
@@ -72,27 +72,30 @@ class MatchRow extends StatelessWidget {
     );
 
     final matchThumbnailLeft = new Container(
-      margin: new EdgeInsets.only(left: 0, top: 16),
+      margin:
+          new EdgeInsets.only(left: size.width * 0.0, top: size.height * 0.023),
       alignment: FractionalOffset(0.0, 0.0),
       child: new Image(
         image: new AssetImage("lib/assets/img/mars.png"),
-        height: 92.0,
-        width: 92.0,
+        height: size.height * 0.12,
+        width: size.width * 0.24,
       ),
     );
 
     final matchThumbnailRight = new Container(
-      margin: new EdgeInsets.only(right: 25, top: 16),
+      margin: new EdgeInsets.only(
+          right: size.width * 0.055, top: size.height * 0.024),
       alignment: FractionalOffset(1.1, 0),
       child: new Image(
         image: new AssetImage("lib/assets/img/mars.png"),
-        height: 92.0,
-        width: 92.0,
+        height: size.height * 0.12,
+        width: size.width * 0.24,
       ),
     );
 
     final matchCard = new Container(
       child: matchCardContent,
+
       height: horizontal ? 124.0 : 154,
       margin: horizontal
           ? new EdgeInsets.only(left: 46.0)
