@@ -26,7 +26,6 @@ class _HomePageBodyState extends State<HomePageBody> {
         new MatchRow(),
         new MatchRow(),
         new MatchRow(),
-        new MatchRow(),
       ],
     );
   }
