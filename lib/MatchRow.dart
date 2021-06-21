@@ -96,7 +96,7 @@ class MatchRow extends StatelessWidget {
       height: horizontal ? 124.0 : 154,
       margin: horizontal
           ? new EdgeInsets.only(left: 46.0)
-          : new EdgeInsets.only(top: 72.0),
+          : new EdgeInsets.only(top: 1.0),
       decoration: new BoxDecoration(
         color: new Color(0xFF333366),
         shape: BoxShape.rectangle,
@@ -124,7 +124,7 @@ class MatchRow extends StatelessWidget {
         child: new Container(
           margin: const EdgeInsets.symmetric(
             vertical: 16.0,
-            horizontal: 24.0,
+            horizontal: 20.0,
           ),
           child: new Stack(
             children: <Widget>[
