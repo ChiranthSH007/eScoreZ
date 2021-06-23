@@ -6,10 +6,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: new Color.fromARGB(255, 62, 58, 99),
+      backgroundColor: Colors.black,
       body: new HomePageBody(),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromARGB(255, 62, 58, 99),
+        backgroundColor: Colors.grey.shade900,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

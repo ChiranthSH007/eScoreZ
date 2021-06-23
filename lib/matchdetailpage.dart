@@ -7,11 +7,11 @@ class DetailPage extends StatelessWidget {
     return new Scaffold(
       body: new Container(
         constraints: new BoxConstraints.expand(),
-        color: new Color.fromARGB(255, 62, 58, 99),
+        color: Colors.black,
         child: new Stack(
           children: [
             _getBackground(),
-            _getGradient(),
+            //_getGradient(),
             _getContent(),
             _getToolbar(context),
           ],
@@ -24,10 +24,10 @@ class DetailPage extends StatelessWidget {
     return new Container(
       child: Image(
         image: new AssetImage("lib/assets/img/valorant.jpg"),
-        height: 400.0,
+        height: 300.0,
         fit: BoxFit.cover,
       ),
-      constraints: new BoxConstraints.expand(height: 400.0),
+      constraints: new BoxConstraints.expand(height: 300.0),
       // child: new Image.network(
       //   "lib/assets/img/valorant.png",
       //   fit: BoxFit.cover,
@@ -36,58 +36,67 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Container _getGradient() {
-    return new Container(
-      margin: new EdgeInsets.only(top: 220.0),
-      height: 180.0,
-      decoration: new BoxDecoration(
-        gradient: new LinearGradient(
-          colors: <Color>[
-            new Color(0x00736AB7),
-            new Color.fromARGB(255, 62, 58, 99),
-          ],
-          stops: [0.0, 0.8],
-          begin: const FractionalOffset(0.0, 0.0),
-          end: const FractionalOffset(0.0, 1.3),
-        ),
-      ),
-    );
-  }
+  // Container _getGradient() {
+  //   return new Container(
+  //     margin: new EdgeInsets.only(top: 220.0),
+  //     height: 180.0,
+  //     decoration: new BoxDecoration(
+  //       gradient: new LinearGradient(
+  //         colors: <Color>[
+  //           new Color(0x00736AB7),
+  //           new Color.fromARGB(255, 62, 58, 99),
+  //         ],
+  //         stops: [0.0, 0.8],
+  //         begin: const FractionalOffset(0.0, 0.0),
+  //         end: const FractionalOffset(0.0, 1.3),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _getContent() {
-    final _overviewTitle = "Overview".toUpperCase();
-    return new ListView(
-      padding: new EdgeInsets.fromLTRB(0.0, 200.0, 0.0, 32.0),
-      children: <Widget>[
-        new MatchRow(
-          horizontal: false,
-        ),
-        new Container(
-          padding: new EdgeInsets.symmetric(horizontal: 32.0),
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              new Text(
-                _overviewTitle,
-                style: TextStyle(
-                    fontFamily: 'Poppins',
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600),
+    return new Container(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 210, 12, 0),
+              child: MatchRow(
+                horizontal: false,
               ),
-              new Separator(),
-              new Text(
-                "On Going Match",
-                style: TextStyle(
-                    fontFamily: 'Poppins',
-                    color: Colors.white,
-                    fontSize: 9.0,
-                    fontWeight: FontWeight.w600),
-              )
-            ],
-          ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.live_tv,
+                        color: Colors.white,
+                      )),
+                ),
+                Container(
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.info,
+                        color: Colors.white,
+                      )),
+                ),
+                Container(
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.trending_up,
+                        color: Colors.white,
+                      )),
+                )
+              ],
+            )
+          ],
         ),
-      ],
+      ),
     );
   }
 
