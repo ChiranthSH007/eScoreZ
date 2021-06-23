@@ -25,29 +25,26 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Colors.grey.shade900,
-      body: _pages[_selectedindex],
+      backgroundColor: Colors.black,
+      body: new HomePageBody(),
       bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color.fromARGB(255, 62, 58, 99),
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.feed),
-              label: 'News',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-            ),
-          ],
-          selectedItemColor: Colors.white,
-          selectedLabelStyle: TextStyle(fontSize: 13),
-          currentIndex: _selectedindex,
-          unselectedItemColor: Colors.white,
-          onTap: _ontapped),
+        backgroundColor: Colors.grey.shade900,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.feed),
+            label: 'News',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+        selectedItemColor: Colors.white,
+      ),
     );
   }
 }

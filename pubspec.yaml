@@ -42,8 +42,13 @@ flutter:
   assets:
     - lib/assets/img/mars.png
     - lib/assets/img/valorant.jpg
+<<<<<<< HEAD
     - lib/assets/img/vctmastersimage.jpg
     - lib/assets/img/kayovalo.jpg
+=======
+    - lib/assets/img/sen-logo.png
+    - lib/assets/img/Fnatic-logo.jpg
+>>>>>>> d7cd516ab06940d19f19c60a11b882e044aa02e0
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -74,6 +79,10 @@ flutter:
           weight: 600
         - asset: lib/assets/fonts/Poppins-Regular.ttf
           weight: 400
+    - family: Odibee Sans
+      fonts:
+        - asset: lib/asstes/fonts/OdibeeSans-Regular.ttf
+          weight: 900
 
   
     -  family: Odibee Sans
