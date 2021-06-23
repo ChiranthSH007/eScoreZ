@@ -11,16 +11,11 @@ class MatchRow extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     //
     final matchCardContent = new Container(
-<<<<<<< HEAD
-      margin: new EdgeInsets.fromLTRB(size.width * 0.25, size.height * 0.008,
-          size.width * 0.25, size.height * 0.008),
-=======
       margin: new EdgeInsets.fromLTRB(
           horizontal ? size.width * 0.23 : size.width * 0.03,
           horizontal ? size.height * 0.01 : size.height * 0.04,
           size.width * 0.01,
           size.height * 0.005),
->>>>>>> a0632e1adc114a365f2133f5d391e703663fb63d
       constraints: new BoxConstraints.expand(),
       child: new Column(
         crossAxisAlignment:
@@ -32,35 +27,15 @@ class MatchRow extends StatelessWidget {
             style: TextStyle(
                 fontFamily: 'Poppins',
                 color: Colors.white,
-<<<<<<< HEAD
-                fontSize: size.width * 0.060,
-                fontWeight: FontWeight.w600),
-          ),
-          new Container(height: size.height * 0.009),
-=======
                 fontSize: size.width * 0.04,
                 fontWeight: FontWeight.w600),
           ),
           new Container(height: size.height * 0.005),
->>>>>>> a0632e1adc114a365f2133f5d391e703663fb63d
           new Text(
             "Match",
             style: TextStyle(
                 fontFamily: 'Poppins',
                 color: Colors.white,
-<<<<<<< HEAD
-                fontSize: size.width * 0.045,
-                fontWeight: FontWeight.w600),
-          ),
-          new Container(
-              margin: new EdgeInsets.symmetric(vertical: size.height * 0.012),
-              height: size.height * 0.004,
-              width: size.width * 0.055,
-              color: new Color(0xff00c6ff)),
-          new Row(
-            children: <Widget>[
-              new Container(width: size.width * 0.008),
-=======
                 fontSize: size.width * 0.03,
                 fontWeight: FontWeight.w600),
           ),
@@ -72,35 +47,22 @@ class MatchRow extends StatelessWidget {
           new Row(
             children: <Widget>[
               new Container(width: size.width * 0.08),
->>>>>>> a0632e1adc114a365f2133f5d391e703663fb63d
               new Text(
                 "12",
                 style: TextStyle(
                     fontFamily: 'Poppins',
                     color: Color(0xffb6b2df),
-<<<<<<< HEAD
-                    fontSize: size.width * 0.029,
-                    fontWeight: FontWeight.w400),
-              ),
-              new Container(width: size.width * 0.080),
-              new Container(width: size.width * 0.012),
-=======
                     fontSize: size.width * 0.04,
                     fontWeight: FontWeight.w400),
               ),
               new Container(width: size.width * 0.017),
               new Container(width: size.width * 0.2),
->>>>>>> a0632e1adc114a365f2133f5d391e703663fb63d
               new Text(
                 "10",
                 style: TextStyle(
                     fontFamily: 'Poppins',
                     color: Color(0xffb6b2df),
-<<<<<<< HEAD
-                    fontSize: size.width * 0.029,
-=======
                     fontSize: size.width * 0.04,
->>>>>>> a0632e1adc114a365f2133f5d391e703663fb63d
                     fontWeight: FontWeight.w400),
               ),
             ],
@@ -133,16 +95,10 @@ class MatchRow extends StatelessWidget {
 
     final matchCard = new Container(
       child: matchCardContent,
-<<<<<<< HEAD
-      height: size.height * 0.18,
-      margin: new EdgeInsets.only(
-          left: size.width * 0.045, right: size.width * 0.035),
-=======
       height: horizontal ? 124.0 : 154,
       margin: horizontal
           ? new EdgeInsets.only(left: 46.0)
           : new EdgeInsets.only(top: 72.0),
->>>>>>> a0632e1adc114a365f2133f5d391e703663fb63d
       decoration: new BoxDecoration(
         color: new Color(0xFF333366),
         shape: BoxShape.rectangle,
