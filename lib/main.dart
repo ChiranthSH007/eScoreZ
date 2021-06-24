@@ -1,5 +1,6 @@
 import 'package:esportzzz/homepage.dart';
 import 'package:esportzzz/matchdetailpage.dart';
+import 'package:esportzzz/newsdetailpage.dart';
 import 'package:esportzzz/splashscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       //   primarySwatch: Colors.blue,
       //   visualDensity: VisualDensity.adaptivePlatformDensity,
       // ),
-      home: new HomePage(),
+      home: new NewsDetail(),
     );
   }
 }

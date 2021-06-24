@@ -1,8 +1,27 @@
 import 'package:esportzzz/MatchRow.dart';
 import 'package:esportzzz/appbar.dart';
+import 'package:esportzzz/newshomepage.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedindex = 0;
+  List<Widget> _pages = [
+    HomePageBody(),
+    NewsHome(),
+  ];
+  void _ontapped(int index) {
+    setState(() {
+      _selectedindex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
