@@ -73,10 +73,6 @@ flutter:
           weight: 600
         - asset: lib/assets/fonts/Poppins-Regular.ttf
           weight: 400
-    - family: Odibee Sans
-      fonts:
-        - asset: lib/asstes/fonts/OdibeeSans-Regular.ttf
-          weight: 900
 
 
   #  - family: Poppins
