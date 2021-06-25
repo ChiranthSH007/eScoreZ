@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: Colors.black,
-      body: new HomePageBody(),
+      body: _pages[_selectedindex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.grey.shade900,
         items: const <BottomNavigationBarItem>[
@@ -44,6 +44,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
         selectedItemColor: Colors.white,
+        currentIndex: _selectedindex,
+        onTap: _ontapped,
       ),
     );
   }

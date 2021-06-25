@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "107784884559",
+    "project_id": "esportzzz-8640a",
+    "storage_bucket": "esportzzz-8640a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107784884559:android:8e2486bf885cea1985f53a",
+        "android_client_info": {
+          "package_name": "com.example.esportzzz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107784884559-pq1ck91apobpa8hnilkhpg4550iv35sr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.esportzzz",
+            "certificate_hash": "29d1672fb8b520e0a9c239013607fad965d144fd"
+          }
+        },
+        {
+          "client_id": "107784884559-lkkiqnfigpq3r5431g7c2no3237iakfm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW_9s2dQBAQ6nJv-3C7QpmyYWLDBrMBnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107784884559-lkkiqnfigpq3r5431g7c2no3237iakfm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

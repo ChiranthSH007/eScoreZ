@@ -103,7 +103,9 @@ class _matchDetailsPageState extends State<matchDetailsPage> {
                 Container(
                   child: IconButton(
                       onPressed: () {
-                        selectedIndex = 2;
+                        setState(() {
+                          selectedIndex = 2;
+                        });
                       },
                       icon: Icon(
                         Icons.info,
