@@ -27,10 +27,6 @@ dependencies:
   firebase_analytics: ^5.0.2
   firebase_auth: ^0.14.0+5
   cloud_firestore: ^0.12.9+5
-
-
-
-
     
 
 
@@ -50,8 +46,6 @@ flutter:
   assets:
     - lib/assets/img/mars.png
     - lib/assets/img/valorant.jpg
-    - lib/assets/img/vctmastersimage.jpg
-    - lib/assets/img/kayovalo.jpg
     - lib/assets/img/sen-logo.png
     - lib/assets/img/Fnatic-logo.jpg
 
@@ -84,6 +78,16 @@ flutter:
           weight: 600
         - asset: lib/assets/fonts/Poppins-Regular.ttf
           weight: 400
+    # - family: Odibee Sans
+    #   fonts:
+    #     - asset: lib/asstes/fonts/OdibeeSans-Regular.ttf
+    #       weight: 900
+
+  
+    # -  family: Odibee Sans
+    #    fonts:
+    #     - asset: lib/assets/fonts/OdibeeSans-Regular.ttf
+    #       weight: 600
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

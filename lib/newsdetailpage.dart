@@ -38,7 +38,7 @@ class _NewsDetailState extends State<NewsDetail> {
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
-                  fontFamily: 'Odibee Sans',
+                  fontFamily: "Poppins",
                   fontSize: 30),
             ),
           ),
@@ -46,7 +46,12 @@ class _NewsDetailState extends State<NewsDetail> {
             padding: EdgeInsets.fromLTRB(0.0, size.height * 0.05, 0.0, 0.0),
             child: Text(
                 'Sentinels defeat Fnatic to grab the title of VCT masters by score 3-0. Sentinels have been crowned winners of Valorant Champions Tour Masters, Reykjavik. The North American side defeated Fnatic in the Grand Finals to claim the title in the very first Valorant International LAN event.Sentinels reached the Grand Finals without losing a single match in the tournament. They beat Nuturn Gaming in the Upper Bracket Finals and secured their place in the grand finals. ',
-                style: TextStyle(color: Colors.white, fontSize: 18)),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: "Poppins",
+                )),
           ),
         ],
       )),

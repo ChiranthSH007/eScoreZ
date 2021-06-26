@@ -43,8 +43,9 @@ class _HomePageState extends State<HomePage> {
             label: 'Settings',
           ),
         ],
-        selectedItemColor: Colors.white,
+        selectedLabelStyle: TextStyle(fontSize: 13),
         currentIndex: _selectedindex,
+        unselectedItemColor: Colors.white,
         onTap: _ontapped,
       ),
     );
