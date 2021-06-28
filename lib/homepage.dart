@@ -28,25 +28,26 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.black,
       body: _pages[_selectedindex],
       bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.grey.shade900,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.feed),
-              label: 'News',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-            ),
-          ],
-          selectedLabelStyle: TextStyle(fontSize: 13),
-          currentIndex: _selectedindex,
-          unselectedItemColor: Colors.white,
-          onTap: _ontapped),
+        backgroundColor: Colors.grey.shade900,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.feed),
+            label: 'News',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+        selectedLabelStyle: TextStyle(fontSize: 13),
+        currentIndex: _selectedindex,
+        unselectedItemColor: Colors.white,
+        onTap: _ontapped,
+      ),
     );
   }
 }

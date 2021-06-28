@@ -1,7 +1,15 @@
 import 'package:esportzzz/MatchRow.dart';
 import 'package:flutter/material.dart';
 
-class DetailPage extends StatelessWidget {
+class matchDetailsPage extends StatefulWidget {
+  const matchDetailsPage({Key? key}) : super(key: key);
+
+  @override
+  _matchDetailsPageState createState() => _matchDetailsPageState();
+}
+
+class _matchDetailsPageState extends State<matchDetailsPage> {
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -70,7 +78,11 @@ class DetailPage extends StatelessWidget {
               children: [
                 Container(
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          selectedIndex = 0;
+                        });
+                      },
                       icon: Icon(
                         Icons.live_tv,
                         color: Colors.white,
@@ -78,25 +90,76 @@ class DetailPage extends StatelessWidget {
                 ),
                 Container(
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          selectedIndex = 1;
+                        });
+                      },
                       icon: Icon(
-                        Icons.info,
+                        Icons.trending_up,
                         color: Colors.white,
                       )),
                 ),
                 Container(
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          selectedIndex = 2;
+                        });
+                      },
                       icon: Icon(
-                        Icons.trending_up,
+                        Icons.info,
                         color: Colors.white,
                       )),
                 )
               ],
+            ),
+            IndexedStack(
+              index: selectedIndex,
+              children: [getLivematches(), getStats(), getInfo()],
             )
           ],
         ),
       ),
+    );
+  }
+
+  Widget getLivematches() {
+    return Column(
+      children: [
+        Center(
+          child: Text(
+            "LIVE UPDATES",
+            style: TextStyle(color: Colors.white),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget getInfo() {
+    return Column(
+      children: [
+        Center(
+          child: Text(
+            "Information OF matches",
+            style: TextStyle(color: Colors.white),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget getStats() {
+    return Column(
+      children: [
+        Center(
+          child: Text(
+            "STATS OF EACH MATCH",
+            style: TextStyle(color: Colors.white),
+          ),
+        )
+      ],
     );
   }
 

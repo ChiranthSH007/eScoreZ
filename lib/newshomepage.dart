@@ -13,6 +13,7 @@ class NewsHome extends StatefulWidget {
 }
 
 class _NewsHomeState extends State<NewsHome> {
+<<<<<<< HEAD
   final Stream<QuerySnapshot> newstream = FirebaseFirestore.instance
       .collection('newsdetails')
       .snapshots(includeMetadataChanges: true);
@@ -21,18 +22,42 @@ class _NewsHomeState extends State<NewsHome> {
   void initState() {
     super.initState();
   }
+=======
+  //final Stream<QuerySnapshot> newstream =
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
+>>>>>>> a70331ba97f64df7f7d9d4951bc7a6320961b3f1
 
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.black,
         body: SafeArea(
           child: StreamBuilder(
+<<<<<<< HEAD
               stream: newstream,
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 return ListView(
                   children: snapshot.data!.docs.map((grocery) {
                     return NewsTile(
                       title: grocery['title'],
+=======
+              stream: FirebaseFirestore.instance
+                  .collection('newsdet')
+                  .snapshots(includeMetadataChanges: true),
+              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                return ListView(
+                  children:
+                      snapshot.data!.docs.map((DocumentSnapshot document) {
+                    Map<String, dynamic> data =
+                        document.data() as Map<String, dynamic>;
+                    return new NewsTile(
+                      title: data['title'],
+                      discription: data['description'],
+                      imgurl: data['imgurl'],
+>>>>>>> a70331ba97f64df7f7d9d4951bc7a6320961b3f1
                     );
                   }).toList(),
                 );
