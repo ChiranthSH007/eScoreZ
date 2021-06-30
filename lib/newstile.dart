@@ -31,8 +31,8 @@ class _NewsTileState extends State<NewsTile> {
         ),
       ),
       child: Container(
-        width: size.width * 0.3,
-        height: size.height * 0.19,
+        width: size.width * 0.2,
+        height: size.height * 0.20,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,37 +47,43 @@ class _NewsTileState extends State<NewsTile> {
               width: size.width * 0.01,
             ),
             Expanded(
-              //padding: const EdgeInsets.fromLTRB(10, 0.1, 10.0, 0.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.fromLTRB(1.0, 3.0, 0.0, 0.0),
+                    // padding: const EdgeInsets.fromLTRB(1.0, 35.0, 0.0, 0.0),
                     child: Text(
                       'Valorant',
                       style: TextStyle(
                         color: Colors.purple,
-                        fontSize: 10,
+                        fontSize: 14,
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.003,
                   ),
                   Text(
                     widget.title,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 14,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
-                    height: size.height * 0.02,
+                    height: size.height * 0.01,
                   ),
                   Text(
                     widget.description,
+                    maxLines: 1,
                     // overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         color: Colors.white,
                         // fontWeight: FontWeight.w600,
                         fontFamily: "Poppins",
-                        fontSize: 13),
+                        fontSize: 10),
                   ),
                 ],
               ),

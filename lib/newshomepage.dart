@@ -3,6 +3,7 @@ import 'package:esportzzz/appbar.dart';
 import 'package:esportzzz/newstile.dart';
 import 'package:esportzzz/operations.dart';
 import 'package:flutter/material.dart';
+import 'appbar.dart';
 
 import 'newsdetailpage.dart';
 
@@ -21,7 +22,15 @@ class _NewsHomeState extends State<NewsHome> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Center(child: Text('eSportzzz')),
+          titleTextStyle: TextStyle(fontSize: 40),
+
+          backgroundColor: Colors.grey[850],
+
+          // elevation: 15,
+          // shadowColor: Colors.grey[200],
+        ),
         backgroundColor: Colors.black,
         body: SafeArea(
           child: StreamBuilder(
