@@ -1,48 +1,119 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:esportzzz/matchdetailpage.dart';
 import 'package:flutter/material.dart';
 
-class MatchRow extends StatelessWidget {
+class MatchRow extends StatefulWidget {
   final bool horizontal;
-  MatchRow({this.horizontal = true});
-  MatchRow.vertical() : horizontal = false;
+  final String date,
+      logo1url,
+      logo2url,
+      teamname1,
+      teamname2,
+      livescoret1,
+      livescoret2;
 
+  const MatchRow(
+      {Key? key,
+      this.horizontal = true,
+      required this.date,
+      required this.livescoret1,
+      required this.livescoret2,
+      required this.logo1url,
+      required this.logo2url,
+      required this.teamname1,
+      required this.teamname2})
+      : super(key: key);
+  //MatchRow.vertical(this.date, this.logo1url, this.logo2url, this.teamname1, this.teamname2, this.livescoret1, this.livescoret2) : horizontal = false;
+
+  @override
+  _MatchRowState createState() => _MatchRowState();
+}
+
+class _MatchRowState extends State<MatchRow> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     //
     final matchCardContent = new Container(
       margin: new EdgeInsets.fromLTRB(
-          horizontal ? size.width * 0.23 : size.width * 0.03,
-          horizontal ? size.height * 0.01 : size.height * 0.04,
+          widget.horizontal ? size.width * 0 : size.width * 0.03,
+          widget.horizontal ? size.height * 0.01 : size.height * 0.04,
           size.width * 0.01,
           size.height * 0.005),
       constraints: new BoxConstraints.expand(),
       child: new Column(
-        crossAxisAlignment:
-            horizontal ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+        crossAxisAlignment: widget.horizontal
+            ? CrossAxisAlignment.start
+            : CrossAxisAlignment.center,
         children: <Widget>[
           new Container(height: size.height * 0.002),
-          horizontal
-              ? Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  //crossAxisAlignment: CrossAxisAlignment.center,
+          widget.horizontal
+              ? Column(
                   children: [
-                    new Text(
-                      "Valorant",
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          color: Colors.white,
-                          fontSize: size.width * 0.04,
-                          fontWeight: FontWeight.w600),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        new Text(
+                          widget.teamname1,
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              color: Colors.white,
+                              fontSize: size.width * 0.04,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "    vs    ",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        new Text(
+                          widget.teamname2,
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              color: Colors.white,
+                              fontSize: size.width * 0.04,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
                     ),
-                    new Text(
-                      "Valorant",
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          color: Colors.white,
-                          fontSize: size.width * 0.04,
-                          fontWeight: FontWeight.w600),
+                    SizedBox(
+                      height: size.height * 0.015,
                     ),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            widget.livescoret1,
+                            style: TextStyle(
+                                fontSize: size.width * 0.05,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            " - ",
+                            style: TextStyle(
+                                fontSize: size.width * 0.05,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            widget.livescoret2,
+                            style: TextStyle(
+                                fontSize: size.width * 0.05,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 )
               : Container(
@@ -59,33 +130,47 @@ class MatchRow extends StatelessWidget {
                       color: Colors.grey.shade800,
                       border: Border.all(color: Colors.white, width: 2)),
                 ),
-          new Container(height: size.height * 0.005),
-          new Text(
-            "Match",
-            style: TextStyle(
-                fontFamily: 'Poppins',
-                color: Colors.white,
-                fontSize: size.width * 0.03,
-                fontWeight: FontWeight.w600),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              new Container(height: size.height * 0.01),
+              new Container(
+                margin: new EdgeInsets.symmetric(vertical: size.height * 0.008),
+                height: size.height * 0.002,
+                width: size.width * 0.2,
+                color: new Color(0xff00c6ff),
+              ),
+            ],
           ),
-          new Container(
-              margin: new EdgeInsets.symmetric(vertical: size.height * 0.008),
-              height: size.height * 0.003,
-              width: size.width * 0.05,
-              color: new Color(0xff00c6ff)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              new Text(
+                widget.date,
+                style: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.white,
+                    fontSize: size.width * 0.026,
+                    fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
         ],
       ),
     );
 
-    final matchThumbnailLeft = horizontal
+    final matchThumbnailLeft = widget.horizontal
         ? new Container(
             margin: new EdgeInsets.only(
-                left: horizontal ? 0 : 10, top: horizontal ? 16 : 10),
+                left: widget.horizontal ? 0 : 10,
+                top: widget.horizontal ? 16 : 10),
             alignment: FractionalOffset(0.0, 0.0),
             child: ClipOval(
-              child: Image(
+              child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                image: new AssetImage("lib/assets/img/sen-logo.png"),
+                imageUrl: widget.logo1url,
                 height: 92.0,
                 width: 92.0,
               ),
@@ -95,7 +180,8 @@ class MatchRow extends StatelessWidget {
             children: [
               Container(
                 margin: new EdgeInsets.only(
-                    left: horizontal ? 0 : 10, top: horizontal ? 16 : 10),
+                    left: widget.horizontal ? 0 : 10,
+                    top: widget.horizontal ? 16 : 10),
                 alignment: FractionalOffset(0.0, 0.0),
                 child: ClipOval(
                   child: Image(
@@ -121,26 +207,29 @@ class MatchRow extends StatelessWidget {
             ],
           );
 
-    final matchThumbnailRight = horizontal
+    final matchThumbnailRight = widget.horizontal
         ? new Container(
             margin: new EdgeInsets.only(
-                right: horizontal ? 25 : 32, top: horizontal ? 16 : 10),
+                right: widget.horizontal ? 25 : 32,
+                top: widget.horizontal ? 16 : 10),
             alignment: FractionalOffset(1.1, 0),
             child: ClipOval(
-              child: Image(
+              child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                image: new AssetImage("lib/assets/img/Fnatic-logo.jpg"),
+                imageUrl: widget.logo2url,
                 height: 92.0,
                 width: 92.0,
               ),
             ),
           )
         : Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                   margin: new EdgeInsets.only(
-                      right: horizontal ? 25 : 32, top: horizontal ? 16 : 10),
+                      right: widget.horizontal ? 25 : 32,
+                      top: widget.horizontal ? 16 : 10),
                   alignment: FractionalOffset(1.1, 0),
                   child: ClipOval(
                     child: Image(
@@ -165,9 +254,9 @@ class MatchRow extends StatelessWidget {
 
     final matchCard = new Container(
       child: matchCardContent,
-      height: horizontal ? 124.0 : 160,
-      margin: horizontal
-          ? new EdgeInsets.only(left: 20.0)
+      height: widget.horizontal ? 124.0 : 160,
+      margin: widget.horizontal
+          ? new EdgeInsets.fromLTRB(15, 0, 15, 0)
           : new EdgeInsets.only(top: 0.0),
       decoration: new BoxDecoration(
         color: Colors.grey.shade900,
@@ -183,10 +272,18 @@ class MatchRow extends StatelessWidget {
       ),
     );
     return new GestureDetector(
-        onTap: horizontal
+        onTap: widget.horizontal
             ? () => Navigator.of(context).push(
                   new PageRouteBuilder(
-                    pageBuilder: (_, __, ___) => new matchDetailsPage(),
+                    pageBuilder: (_, __, ___) => new matchDetailsPage(
+                      date: widget.date,
+                      livescoret1: widget.livescoret1,
+                      livescoret2: widget.livescoret2,
+                      teamname1: widget.teamname1,
+                      teamname2: widget.teamname2,
+                      logo1url: widget.logo1url,
+                      logo2url: widget.logo2url,
+                    ),
                     transitionsBuilder: (context, animation, secondaryAnimation,
                             child) =>
                         new FadeTransition(opacity: animation, child: child),

@@ -1,6 +1,7 @@
 import 'package:esportzzz/homepage.dart';
 import 'package:esportzzz/matchdetailpage.dart';
 import 'package:esportzzz/newsdetailpage.dart';
+import 'package:esportzzz/newshomepage.dart';
 import 'package:esportzzz/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -36,13 +37,22 @@ class _MyAppState extends State<MyApp> {
   }
 
   void initState() {
-    initializeFlutterFire();
     super.initState();
+    initializeFlutterFire();
   }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    if (_error) {
+      print("ERROR IS      ");
+      print(_error);
+    }
+
+    // Show a loader until FlutterFire is initialized
+    if (!_initialized) {
+      return CircularProgressIndicator();
+    }
     return MaterialApp(
       title: 'eSportzzz',
       debugShowCheckedModeBanner: false,

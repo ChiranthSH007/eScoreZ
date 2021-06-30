@@ -2,7 +2,23 @@ import 'package:esportzzz/MatchRow.dart';
 import 'package:flutter/material.dart';
 
 class matchDetailsPage extends StatefulWidget {
-  const matchDetailsPage({Key? key}) : super(key: key);
+  final String date,
+      logo1url,
+      logo2url,
+      teamname1,
+      teamname2,
+      livescoret1,
+      livescoret2;
+  const matchDetailsPage(
+      {Key? key,
+      required this.date,
+      required this.livescoret1,
+      required this.livescoret2,
+      required this.logo1url,
+      required this.logo2url,
+      required this.teamname1,
+      required this.teamname2})
+      : super(key: key);
 
   @override
   _matchDetailsPageState createState() => _matchDetailsPageState();
@@ -71,6 +87,13 @@ class _matchDetailsPageState extends State<matchDetailsPage> {
               padding: const EdgeInsets.fromLTRB(12, 210, 12, 0),
               child: MatchRow(
                 horizontal: false,
+                date: widget.date,
+                livescoret1: widget.livescoret1,
+                livescoret2: widget.livescoret2,
+                teamname1: widget.teamname1,
+                teamname2: widget.teamname2,
+                logo1url: widget.logo1url,
+                logo2url: widget.logo2url,
               ),
             ),
             Row(

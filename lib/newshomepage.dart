@@ -21,13 +21,19 @@ class _NewsHomeState extends State<NewsHome> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(),
         backgroundColor: Colors.black,
         body: SafeArea(
           child: StreamBuilder(
               stream: FirebaseFirestore.instance
-                  .collection('newsdet')
+                  .collection('newsdetails')
                   .snapshots(includeMetadataChanges: true),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
                 return ListView(
                   children:
                       snapshot.data!.docs.map((DocumentSnapshot document) {
@@ -35,7 +41,7 @@ class _NewsHomeState extends State<NewsHome> {
                         document.data() as Map<String, dynamic>;
                     return new NewsTile(
                       title: data['title'],
-                      discription: data['description'],
+                      description: data['description'],
                       imgurl: data['imgurl'],
                     );
                   }).toList(),
