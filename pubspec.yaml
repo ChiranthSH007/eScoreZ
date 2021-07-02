@@ -82,11 +82,7 @@ flutter:
           weight: 400
     # - family: Snes
     #   fonts:
-    #     - asset: lib/assets/fonts/SnesItalic-1G9Be.ttf
-    #     - weight: 900
-    # - family: Odibee Sans
-    #   fonts:
-    #     - asset: lib/asstes/fonts/OdibeeSans-Regular.ttf
+    #     - asset: lib/asstes/fonts/SnesItalic-1G9Be.ttf
     #       weight: 900
 
   

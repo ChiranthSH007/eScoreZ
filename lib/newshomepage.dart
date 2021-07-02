@@ -49,7 +49,7 @@ class _NewsHomeState extends State<NewsHome> {
                     Map<String, dynamic> data =
                         document.data() as Map<String, dynamic>;
                     return Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 12),
                       child: new NewsTile(
                         title: data['title'],
                         description: data['description'],
