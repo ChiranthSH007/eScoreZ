@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:esportzzz/appbar.dart';
 import 'package:esportzzz/matchdetailpage.dart';
 import 'package:esportzzz/newsdetailpage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class NewsTile extends StatefulWidget {
@@ -31,8 +34,9 @@ class _NewsTileState extends State<NewsTile> {
         ),
       ),
       child: Container(
+        color: Colors.grey,
         width: size.width * 0.2,
-        height: size.height * 0.20,
+        height: size.height * 0.14,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +48,7 @@ class _NewsTileState extends State<NewsTile> {
               fit: BoxFit.cover,
             ),
             SizedBox(
-              width: size.width * 0.01,
+              width: size.width * 0.022,
             ),
             Expanded(
               child: Column(
@@ -66,11 +70,17 @@ class _NewsTileState extends State<NewsTile> {
                   ),
                   Text(
                     widget.title,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: GoogleFonts.bebasNeue(
+                        fontSize: 20,
+                        color: Colors.white,
+                        //fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w400),
+                    // style: TextStyle(
+                    //   fontFamily: 'Sens',
+                    //   color: Colors.white,
+                    //   fontSize: 15,
+                    //   fontWeight: FontWeight.bold,
+                    // ),
                   ),
                   SizedBox(
                     height: size.height * 0.01,
@@ -79,11 +89,12 @@ class _NewsTileState extends State<NewsTile> {
                     widget.description,
                     maxLines: 1,
                     // overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: Colors.white,
-                        // fontWeight: FontWeight.w600,
-                        fontFamily: "Poppins",
-                        fontSize: 10),
+                    style: GoogleFonts.raleway(color: Colors.white),
+                    // style: TextStyle(
+                    //     color: Colors.white,
+                    //     // fontWeight: FontWeight.w600,
+                    //     fontFamily: "Poppins",
+                    //     fontSize: 10),
                   ),
                 ],
               ),

@@ -23,7 +23,6 @@ class MatchRow extends StatefulWidget {
       required this.teamname1,
       required this.teamname2})
       : super(key: key);
-  //MatchRow.vertical(this.date, this.logo1url, this.logo2url, this.teamname1, this.teamname2, this.livescoret1, this.livescoret2) : horizontal = false;
 
   @override
   _MatchRowState createState() => _MatchRowState();
@@ -62,15 +61,9 @@ class _MatchRowState extends State<MatchRow> {
                               fontSize: size.width * 0.04,
                               fontWeight: FontWeight.w600),
                         ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
+                        new Text(
                           "    vs    ",
                           style: TextStyle(color: Colors.white),
-                        ),
-                        SizedBox(
-                          width: 5,
                         ),
                         new Text(
                           widget.teamname2,
@@ -91,21 +84,7 @@ class _MatchRowState extends State<MatchRow> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            widget.livescoret1,
-                            style: TextStyle(
-                                fontSize: size.width * 0.05,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            " - ",
-                            style: TextStyle(
-                                fontSize: size.width * 0.05,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            widget.livescoret2,
+                            widget.livescoret1 + " - " + widget.livescoret2,
                             style: TextStyle(
                                 fontSize: size.width * 0.05,
                                 color: Colors.white,
@@ -118,17 +97,21 @@ class _MatchRowState extends State<MatchRow> {
                 )
               : Container(
                   padding: EdgeInsets.all(size.width * 0.02),
-                  child: Text(
-                    "12 - 10",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: size.width * 0.05),
+                  width: size.width * 0.22,
+                  child: Center(
+                    child: Text(
+                      widget.livescoret1 + " - " + widget.livescoret2,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: size.width * 0.05),
+                    ),
                   ),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7),
                       color: Colors.grey.shade800,
-                      border: Border.all(color: Colors.white, width: 2)),
+                      border: Border.all(
+                          color: Colors.white, width: size.width * 0.002)),
                 ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -184,9 +167,9 @@ class _MatchRowState extends State<MatchRow> {
                     top: widget.horizontal ? 16 : 10),
                 alignment: FractionalOffset(0.0, 0.0),
                 child: ClipOval(
-                  child: Image(
+                  child: CachedNetworkImage(
                     fit: BoxFit.cover,
-                    image: new AssetImage("lib/assets/img/sen-logo.png"),
+                    imageUrl: widget.logo1url,
                     height: 92.0,
                     width: 92.0,
                   ),
@@ -197,7 +180,7 @@ class _MatchRowState extends State<MatchRow> {
                     size.width * 0.10, size.height * 0.02, 0, 0),
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "SEN",
+                  widget.teamname1,
                   style: TextStyle(
                       fontFamily: 'Odibee Sans',
                       color: Colors.white,
@@ -232,16 +215,16 @@ class _MatchRowState extends State<MatchRow> {
                       top: widget.horizontal ? 16 : 10),
                   alignment: FractionalOffset(1.1, 0),
                   child: ClipOval(
-                    child: Image(
+                    child: CachedNetworkImage(
                       fit: BoxFit.cover,
-                      image: new AssetImage("lib/assets/img/Fnatic-logo.jpg"),
+                      imageUrl: widget.logo2url,
                       height: 92.0,
                       width: 92.0,
                     ),
                   )),
               Container(
                 child: Text(
-                  "FNATIC",
+                  widget.teamname2,
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),

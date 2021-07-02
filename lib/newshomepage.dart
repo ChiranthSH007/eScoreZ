@@ -48,10 +48,13 @@ class _NewsHomeState extends State<NewsHome> {
                       snapshot.data!.docs.map((DocumentSnapshot document) {
                     Map<String, dynamic> data =
                         document.data() as Map<String, dynamic>;
-                    return new NewsTile(
-                      title: data['title'],
-                      description: data['description'],
-                      imgurl: data['imgurl'],
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: new NewsTile(
+                        title: data['title'],
+                        description: data['description'],
+                        imgurl: data['imgurl'],
+                      ),
                     );
                   }).toList(),
                 );

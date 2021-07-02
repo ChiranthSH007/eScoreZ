@@ -56,10 +56,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'eSportzzz',
       debugShowCheckedModeBanner: false,
-      // theme: ThemeData(
-      //   primarySwatch: Colors.blue,
-      //   visualDensity: VisualDensity.adaptivePlatformDensity,
-      // ),
+      theme: ThemeData(
+        primarySwatch: Colors.grey,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       home: new HomePage(),
     );
   }
