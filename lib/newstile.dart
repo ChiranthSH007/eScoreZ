@@ -25,18 +25,25 @@ class _NewsTileState extends State<NewsTile> {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
         new PageRouteBuilder(
-          pageBuilder: (_, __, ___) => new NewsDetail(),
+          pageBuilder: (_, __, ___) => new NewsDetail(
+            title: widget.title,
+            description: widget.description,
+            imgurl: widget.imgurl,
+          ),
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               new FadeTransition(opacity: animation, child: child),
         ),
       ),
       child: Container(
+        color: Colors.grey[900],
         width: size.width * 0.2,
-        height: size.height * 0.20,
+        height: size.height * 0.14,
+        padding: EdgeInsets.only(top: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(width: size.width * 0.02),
             CachedNetworkImage(
               imageUrl: widget.imgurl,
               height: size.height * 0.12,
@@ -44,7 +51,7 @@ class _NewsTileState extends State<NewsTile> {
               fit: BoxFit.cover,
             ),
             SizedBox(
-              width: size.width * 0.01,
+              width: size.width * 0.02,
             ),
             Expanded(
               child: Column(
@@ -56,7 +63,8 @@ class _NewsTileState extends State<NewsTile> {
                     child: Text(
                       'Valorant',
                       style: TextStyle(
-                        color: Colors.purple,
+                        color: Colors.purple[300],
+                        fontFamily: "Snes",
                         fontSize: 14,
                       ),
                     ),

@@ -28,6 +28,7 @@ dependencies:
   firebase_auth: ^1.4.1
   cloud_firestore: ^2.2.1
   cached_network_image: ^3.0.0
+  google_fonts: ^2.1.0
     
 
 
@@ -79,9 +80,9 @@ flutter:
           weight: 600
         - asset: lib/assets/fonts/Poppins-Regular.ttf
           weight: 400
-    # - family: Odibee Sans
+    # - family: Snes
     #   fonts:
-    #     - asset: lib/asstes/fonts/OdibeeSans-Regular.ttf
+    #     - asset: lib/asstes/fonts/SnesItalic-1G9Be.ttf
     #       weight: 900
 
   
