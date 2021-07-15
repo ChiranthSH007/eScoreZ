@@ -3,6 +3,7 @@ import 'package:esportzzz/appbar.dart';
 import 'package:esportzzz/matchdetailpage.dart';
 import 'package:esportzzz/newsdetailpage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class NewsTile extends StatefulWidget {
@@ -74,9 +75,10 @@ class _NewsTileState extends State<NewsTile> {
                   ),
                   Text(
                     widget.title,
-                    style: TextStyle(
+                    maxLines: 2,
+                    style: GoogleFonts.rowdies(
                       color: Colors.white,
-                      fontSize: 15,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

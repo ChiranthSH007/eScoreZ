@@ -1,3 +1,5 @@
+import 'package:esportzzz/emailloginpage.dart';
+import 'package:esportzzz/emailsignuppage.dart';
 import 'package:esportzzz/homepage.dart';
 import 'package:esportzzz/matchdetailpage.dart';
 import 'package:esportzzz/newsdetailpage.dart';
@@ -60,7 +62,7 @@ class _MyAppState extends State<MyApp> {
       //   primarySwatch: Colors.blue,
       //   visualDensity: VisualDensity.adaptivePlatformDensity,
       // ),
-      home: new HomePage(),
+      home: new emailsignuppage(),
     );
   }
 }
