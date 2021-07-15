@@ -23,7 +23,7 @@ class _NewsHomeState extends State<NewsHome> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text('eSportzzz')),
+          title: Center(child: Text('GLITCHY')),
           titleTextStyle: TextStyle(fontSize: 40),
 
           backgroundColor: Colors.grey[850],

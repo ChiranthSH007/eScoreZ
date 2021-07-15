@@ -118,7 +118,7 @@ class _MatchRowState extends State<MatchRow> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               new Container(height: size.height * 0.01),
-              new Container(
+              new Container( 
                 margin: new EdgeInsets.symmetric(vertical: size.height * 0.008),
                 height: size.height * 0.002,
                 width: size.width * 0.2,

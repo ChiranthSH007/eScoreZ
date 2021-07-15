@@ -68,7 +68,7 @@ class _NewsTileState extends State<NewsTile> {
                       style: TextStyle(
                         color: Colors.purple[300],
                         fontFamily: "Snes",
-                        fontSize: 14,
+                        fontSize: 15,
                       ),
                     ),
                   ),
@@ -77,16 +77,17 @@ class _NewsTileState extends State<NewsTile> {
                   ),
                   Text(
                     widget.title,
-                    style: GoogleFonts.bebasNeue(
-                        fontSize: 20,
-                        color: Colors.white,
-                        //fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w400),
+                    maxLines: 2,
+                    style: GoogleFonts.rowdies(
+                      fontSize: 14,
+                      color: Colors.white,
+                      //fontStyle: FontStyle.italic,
+                    ),
                     // style: TextStyle(
-                    //   fontFamily: 'Sens',
                     //   color: Colors.white,
-                    //   fontSize: 15,
-                    //   fontWeight: FontWeight.bold,
+                    //   fontFamily: 'Snes',
+                    //   fontWeight: FontWeight.w500,
+                    //   fontSize: 22,
                     // ),
                   ),
                   SizedBox(

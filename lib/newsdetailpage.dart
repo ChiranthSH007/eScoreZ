@@ -48,11 +48,11 @@ class _NewsDetailState extends State<NewsDetail> {
             padding: EdgeInsets.fromLTRB(0.0, size.height * 0.02, 0.0, 0.0),
             child: Text(
               widget.title,
-              style: GoogleFonts.bebasNeue(
+              style: GoogleFonts.rowdies(
                   color: Colors.white,
-                  fontWeight: FontWeight.w400,
                   // fontStyle: FontStyle.italic,
-                  fontSize: 25),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22),
             ),
             // style: TextStyle(
             //     color: Colors.white,
@@ -62,13 +62,19 @@ class _NewsDetailState extends State<NewsDetail> {
           ),
           Container(
             padding: EdgeInsets.fromLTRB(0.0, size.height * 0.04, 0.0, 0.0),
-            child: Text(widget.description,
-                style: TextStyle(
+            child: Text(
+              widget.description,
+              style: GoogleFonts.nunito(
                   color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w900,
-                  fontFamily: 'Poppins',
-                )),
+                  fontSize: 17,
+                  fontWeight: FontWeight.w300),
+              // style: TextStyle(
+              //   color: Colors.white,
+              //   fontSize: 18,
+              //   fontWeight: FontWeight.w900,
+              //   fontFamily: 'Poppins',
+              // ),
+            ),
           ),
         ],
       )),

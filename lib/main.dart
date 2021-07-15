@@ -1,4 +1,5 @@
 import 'package:esportzzz/homepage.dart';
+import 'package:esportzzz/login_select_page.dart';
 import 'package:esportzzz/matchdetailpage.dart';
 import 'package:esportzzz/newsdetailpage.dart';
 import 'package:esportzzz/newshomepage.dart';
@@ -54,13 +55,13 @@ class _MyAppState extends State<MyApp> {
       return CircularProgressIndicator();
     }
     return MaterialApp(
-      title: 'eSportzzz',
+      title: 'GLITCHY',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.grey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: new HomePage(),
+      home: new Login_Select(),
     );
   }
 }
