@@ -79,9 +79,9 @@ class _NewsTileState extends State<NewsTile> {
                     widget.title,
                     maxLines: 2,
                     style: GoogleFonts.rowdies(
-                      fontSize: 14,
                       color: Colors.white,
-                      //fontStyle: FontStyle.italic,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
                     ),
                     // style: TextStyle(
                     //   color: Colors.white,

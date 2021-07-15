@@ -50,30 +50,27 @@ class _NewsDetailState extends State<NewsDetail> {
               widget.title,
               style: GoogleFonts.rowdies(
                   color: Colors.white,
-                  // fontStyle: FontStyle.italic,
                   fontWeight: FontWeight.bold,
-                  fontSize: 22),
+                  // fontStyle: FontStyle.italic,
+                  fontSize: 23),
             ),
-            // style: TextStyle(
-            //     color: Colors.white,
-            //     fontWeight: FontWeight.w900,
-            //     fontFamily: "Poppins",
-            //     fontSize: 25),
           ),
+
+          // style: TextStyle(
+          //     color: Colors.white,
+          //     fontWeight: FontWeight.w900,
+          //     fontFamily: "Poppins",
+          //     fontSize: 25),
+
           Container(
             padding: EdgeInsets.fromLTRB(0.0, size.height * 0.04, 0.0, 0.0),
             child: Text(
               widget.description,
               style: GoogleFonts.nunito(
-                  color: Colors.white,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w300),
-              // style: TextStyle(
-              //   color: Colors.white,
-              //   fontSize: 18,
-              //   fontWeight: FontWeight.w900,
-              //   fontFamily: 'Poppins',
-              // ),
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w300,
+              ),
             ),
           ),
         ],
