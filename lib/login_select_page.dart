@@ -1,3 +1,5 @@
+import 'package:esportzzz/emailloginpage.dart';
+import 'package:esportzzz/emailsignuppage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
@@ -23,7 +25,7 @@ class _Login_SelectState extends State<Login_Select> {
               alignment: Alignment.center,
               height: size.height * 0.6,
               child: Text(
-                "GY",
+                "EZ",
                 style:
                     TextStyle(fontSize: size.height * 0.2, color: Colors.white),
               ),
@@ -39,7 +41,10 @@ class _Login_SelectState extends State<Login_Select> {
               constraints: BoxConstraints.tightFor(
                   width: size.width * 0.6, height: size.height * 0.06),
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => emaillogin()));
+                  },
                   child: Text(
                     "Log In",
                     style: TextStyle(
@@ -58,7 +63,10 @@ class _Login_SelectState extends State<Login_Select> {
               constraints: BoxConstraints.tightFor(
                   width: size.width * 0.6, height: size.height * 0.06),
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => emailsignuppage()));
+                  },
                   child: Text(
                     "Sign Up",
                     style: TextStyle(

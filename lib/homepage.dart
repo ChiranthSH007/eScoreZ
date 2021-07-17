@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedindex = 0;
   List<Widget> _pages = [
-    MatchesHomePage(),
     NewsHome(),
   ];
   void _ontapped(int index) {

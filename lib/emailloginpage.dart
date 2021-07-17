@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:esportzzz/homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class emaillogin extends StatefulWidget {
   const emaillogin({Key? key}) : super(key: key);
@@ -10,12 +13,17 @@ class emaillogin extends StatefulWidget {
 }
 
 class _emailloginState extends State<emaillogin> {
-  String? login_email, login_password;
-  var _formkey = GlobalKey<FormState>();
-
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
       backgroundColor: Colors.black,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +57,7 @@ class _emailloginState extends State<emaillogin> {
             ),
           ),
           Form(
-            key: _formkey,
+            key: _formKey,
             child: Container(
               padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
               child: Column(
@@ -57,14 +65,10 @@ class _emailloginState extends State<emaillogin> {
                   Container(
                     // color: Colors.grey[850],
                     child: TextFormField(
+                      controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
                       validator: (item) {
                         return item!.contains("@") ? null : "Enter Valid Email";
-                      },
-                      onChanged: (item) {
-                        setState(() {
-                          login_email = item;
-                        });
                       },
                       decoration: InputDecoration(
                           filled: true,
@@ -94,17 +98,13 @@ class _emailloginState extends State<emaillogin> {
                   Container(
                     // color: Colors.grey[850],
                     child: TextFormField(
+                      controller: _passwordController,
                       obscureText: true,
                       keyboardType: TextInputType.text,
                       validator: (item) {
                         return item!.length > 6
                             ? null
                             : "Password must be more than 6 charecters";
-                      },
-                      onChanged: (item) {
-                        setState(() {
-                          login_password = item;
-                        });
                       },
                       style: TextStyle(color: Colors.grey),
                       decoration: InputDecoration(
@@ -156,7 +156,9 @@ class _emailloginState extends State<emaillogin> {
                       elevation: 7.0,
                       child: GestureDetector(
                         onTap: () {
-                          if (_formkey.currentState!.validate()) {}
+                          if (_formKey.currentState!.validate()) {
+                            _signinWithEmailPassword();
+                          }
                         },
                         child: Center(
                           child: Text(
@@ -176,5 +178,29 @@ class _emailloginState extends State<emaillogin> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  _signinWithEmailPassword() async {
+    try {
+      final User? user = (await _firebaseAuth.signInWithEmailAndPassword(
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim()))
+          .user;
+
+      if (user != null) {
+        Fluttertoast.showToast(msg: "Sign In Successfull");
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+    }
   }
 }
