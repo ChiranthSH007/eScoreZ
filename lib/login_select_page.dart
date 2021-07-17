@@ -23,7 +23,7 @@ class _Login_SelectState extends State<Login_Select> {
               alignment: Alignment.center,
               height: size.height * 0.6,
               child: Text(
-                "GY",
+                "EZ",
                 style:
                     TextStyle(fontSize: size.height * 0.2, color: Colors.white),
               ),

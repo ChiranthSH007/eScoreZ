@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esportzzz/MatchRow.dart';
 import 'package:esportzzz/appbar.dart';
+import 'package:esportzzz/navbar.dart';
 import 'package:esportzzz/newshomepage.dart';
+import 'package:esportzzz/savedpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +17,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedindex = 0;
   List<Widget> _pages = [
-    MatchesHomePage(),
     NewsHome(),
+    SavedPage(),
   ];
   void _ontapped(int index) {
     setState(() {
@@ -33,16 +35,12 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.grey.shade900,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.feed),
             label: 'News',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.save_alt_rounded),
+            label: 'Saved',
           ),
         ],
         selectedLabelStyle: TextStyle(fontSize: 13),
@@ -68,9 +66,12 @@ class _MatchesHomePageState extends State<MatchesHomePage> {
   }
 
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(),
+      appBar: AppBar(
+        
+      ),
       body: SafeArea(
           child: StreamBuilder(
         stream: FirebaseFirestore.instance

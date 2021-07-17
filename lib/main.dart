@@ -57,13 +57,13 @@ class _MyAppState extends State<MyApp> {
       return CircularProgressIndicator();
     }
     return MaterialApp(
-      title: 'GLITCHY',
+      title: 'eScoreZ',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.grey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: new emaillogin(),
+      home: new HomePage(),
     );
   }
 }
