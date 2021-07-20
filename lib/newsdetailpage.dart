@@ -21,7 +21,7 @@ class _NewsDetailState extends State<NewsDetail> {
     Size size = MediaQuery.of(context).size;
     return new Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('eSportzzz')),
+        title: Center(child: Text('eScoreZ')),
         titleTextStyle: TextStyle(fontSize: 40),
 
         backgroundColor: Colors.grey[850],

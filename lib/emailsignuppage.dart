@@ -23,6 +23,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
@@ -66,6 +67,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
                   Container(
                     // color: Colors.grey[850],
                     child: TextFormField(
+                      style: TextStyle(color: Colors.white),
                       controller: _userNameController,
                       keyboardType: TextInputType.name,
                       validator: (item) {
@@ -78,7 +80,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
                           fillColor: Colors.grey[850],
                           enabledBorder: const OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
+                                BorderRadius.all(Radius.circular(40.0)),
                             borderSide:
                                 const BorderSide(color: Colors.purpleAccent),
                           ),
@@ -90,7 +92,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0)),
+                                  BorderRadius.all(Radius.circular(40.0)),
                               borderSide:
                                   BorderSide(color: Colors.purpleAccent))),
                     ),
@@ -101,6 +103,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
                   Container(
                     // color: Colors.grey[850],
                     child: TextFormField(
+                      style: TextStyle(color: Colors.white),
                       keyboardType: TextInputType.emailAddress,
                       controller: _emailController,
                       validator: (item) {
@@ -111,7 +114,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
                           fillColor: Colors.grey[850],
                           enabledBorder: const OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
+                                BorderRadius.all(Radius.circular(40.0)),
                             borderSide:
                                 const BorderSide(color: Colors.purpleAccent),
                           ),
@@ -123,7 +126,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0)),
+                                  BorderRadius.all(Radius.circular(40.0)),
                               borderSide:
                                   BorderSide(color: Colors.purpleAccent))),
                     ),
@@ -147,7 +150,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
                         filled: true,
                         fillColor: Colors.grey[850],
                         enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderRadius: BorderRadius.all(Radius.circular(40.0)),
                           borderSide:
                               const BorderSide(color: Colors.purpleAccent),
                         ),
@@ -159,7 +162,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
                         ),
                         focusedBorder: const OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
+                                BorderRadius.all(Radius.circular(40.0)),
                             borderSide:
                                 const BorderSide(color: Colors.purpleAccent)),
                       ),
@@ -184,7 +187,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
                         filled: true,
                         fillColor: Colors.grey[850],
                         enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderRadius: BorderRadius.all(Radius.circular(40.0)),
                           borderSide:
                               const BorderSide(color: Colors.purpleAccent),
                         ),
@@ -196,7 +199,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
                         ),
                         focusedBorder: const OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
+                                BorderRadius.all(Radius.circular(40.0)),
                             borderSide:
                                 const BorderSide(color: Colors.purpleAccent)),
                       ),
@@ -205,50 +208,50 @@ class _emailsignuppageState extends State<emailsignuppage> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  Container(
-                    padding: EdgeInsets.only(top: 15.0, left: 20.0),
-                    child: InkWell(
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: Colors.purpleAccent,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   padding: EdgeInsets.only(top: 15.0, left: 20.0),
+                  //   child: InkWell(
+                  //     child: Text(
+                  //       'Forgot Password?',
+                  //       style: TextStyle(
+                  //         color: Colors.purpleAccent,
+                  //         fontWeight: FontWeight.bold,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 20.0,
                   ),
-                  Container(
-                    height: 40.0,
-                    child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.deepPurpleAccent,
-                      color: Colors.purpleAccent,
-                      elevation: 7.0,
-                      child: GestureDetector(
-                        onTap: () {
+                  ConstrainedBox(
+                    constraints: BoxConstraints.tightFor(
+                      width: size.width * 0.6,
+                      height: size.height * 0.06,
+                    ),
+                    child: ElevatedButton(
+                        onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             _register();
                           }
                         },
-                        child: Center(
-                          child: Text(
-                            'SIGN UP',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
+                        child: Text(
+                          "Sign Up",
+                          style: TextStyle(
+                              color: Colors.white, fontSize: size.width * 0.04),
                         ),
-                      ),
-                    ),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.purpleAccent,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(
+                                    size.width * 0.5)),
+                            side: BorderSide(
+                                width: size.width * 0.004,
+                                color: Colors.purpleAccent))),
                   ),
                 ],
               ),
             ),
           ),
-          
         ],
       ),
     );

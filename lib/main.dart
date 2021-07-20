@@ -1,5 +1,6 @@
 import 'package:esportzzz/emailloginpage.dart';
 import 'package:esportzzz/emailsignuppage.dart';
+import 'package:esportzzz/forgotpasswordpage.dart';
 import 'package:esportzzz/homepage.dart';
 import 'package:esportzzz/login_select_page.dart';
 import 'package:esportzzz/matchdetailpage.dart';

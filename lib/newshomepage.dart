@@ -5,6 +5,7 @@ import 'package:esportzzz/operations.dart';
 import 'package:flutter/material.dart';
 import 'appbar.dart';
 
+import 'navbar.dart';
 import 'newsdetailpage.dart';
 
 class NewsHome extends StatefulWidget {
@@ -22,8 +23,9 @@ class _NewsHomeState extends State<NewsHome> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: NavBar(),
         appBar: AppBar(
-          title: Center(child: Text('GLITCHY')),
+          title: Center(child: Text('eScoreZ')),
           titleTextStyle: TextStyle(fontSize: 40),
 
           backgroundColor: Colors.grey[850],

@@ -55,6 +55,8 @@ flutter:
     - lib/assets/img/Fnatic-logo.jpg
     - lib/assets/img/backround.jpeg
     - lib/assets/eScoreZLogo.mp4
+    - lib/assets/img/forgot-password.png
+    - lib/assets/img/forgotpassword.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
