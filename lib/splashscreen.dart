@@ -6,21 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:video_player/video_player.dart';
 
-class splash_screen extends StatelessWidget {
-  const splash_screen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Center(
-          child: Text("Welcome To eSportzzz mobile App"),
-        ),
-      ),
-    );
-  }
-}
-
 class Splash_Screen extends StatefulWidget {
   const Splash_Screen({Key? key}) : super(key: key);
 
@@ -29,58 +14,33 @@ class Splash_Screen extends StatefulWidget {
 }
 
 class _Splash_ScreenState extends State<Splash_Screen> {
-  bool _initialized = false;
   late VideoPlayerController _controller;
-  bool _error = false;
-  void initializeFlutterFire() async {
-    try {
-      // Wait for Firebase to initialize and set `_initialized` state to true
-      await Firebase.initializeApp();
-      setState(() {
-        _initialized = true;
-      });
-    } catch (e) {
-      // Set `_error` state to true if Firebase initialization fails
-      setState(() {
-        _error = true;
-      });
-    }
-  }
 
   void initState() {
     super.initState();
     _controller = VideoPlayerController.asset("lib/assets/eScoreZLogo.mp4");
     _controller.initialize().then((_) {
-      _controller.setLooping(true);
-      Timer(Duration(seconds: 4), () {
-        setState(() {
-          _controller.play();
-        });
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Login_Select()));
-      });
+      //_controller.setLooping(true);
+      _controller.play();
     });
-    initializeFlutterFire();
+    Timer(Duration(seconds: 4), () {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => Login_Select()),
+          (Route<dynamic> rr) => false);
+    });
   }
 
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
+    _controller.dispose();
   }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    if (_error) {
-      print("ERROR IS      ");
-      print(_error);
-    }
-
     // Show a loader until FlutterFire is initialized
-    if (!_initialized) {
-      return CircularProgressIndicator();
-    }
     return MaterialApp(
       title: 'eScoreZ',
       debugShowCheckedModeBanner: false,
@@ -91,12 +51,16 @@ class _Splash_ScreenState extends State<Splash_Screen> {
       home: new Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              width: _controller.value.size.width,
-              height: _controller.value.size.height,
-              child: VideoPlayer(_controller),
-            )
+            Center(
+              child: SizedBox(
+                width: _controller.value.size.width * 0.5,
+                height: _controller.value.size.height * 0.52,
+                child: VideoPlayer(_controller),
+              ),
+            ),
           ],
         ),
       ),
