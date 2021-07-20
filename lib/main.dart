@@ -1,5 +1,6 @@
 import 'package:esportzzz/emailloginpage.dart';
 import 'package:esportzzz/emailsignuppage.dart';
+import 'package:esportzzz/forgotpasswordpage.dart';
 import 'package:esportzzz/homepage.dart';
 import 'package:esportzzz/login_select_page.dart';
 import 'package:esportzzz/matchdetailpage.dart';
@@ -63,7 +64,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.grey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: new HomePage(),
+      home: new Login_Select(),
     );
   }
 }

@@ -1,4 +1,9 @@
+import 'package:esportzzz/homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class emailsignuppage extends StatefulWidget {
   const emailsignuppage({Key? key}) : super(key: key);
@@ -8,12 +13,17 @@ class emailsignuppage extends StatefulWidget {
 }
 
 class _emailsignuppageState extends State<emailsignuppage> {
-  String? signupemail, signuppassword, signupconfirmpassword, signupusername;
-
-  var _formkey = GlobalKey<FormState>();
+  bool isLoading = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confpasswordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
@@ -49,7 +59,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
             ),
           ),
           Form(
-            key: _formkey,
+            key: _formKey,
             child: Container(
               padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
               child: Column(
@@ -57,23 +67,20 @@ class _emailsignuppageState extends State<emailsignuppage> {
                   Container(
                     // color: Colors.grey[850],
                     child: TextFormField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _userNameController,
                       keyboardType: TextInputType.name,
                       validator: (item) {
                         return item!.isNotEmpty
                             ? null
                             : "Username should not be empty";
                       },
-                      onChanged: (item) {
-                        setState(() {
-                          signupusername = item;
-                        });
-                      },
                       decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.grey[850],
                           enabledBorder: const OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
+                                BorderRadius.all(Radius.circular(40.0)),
                             borderSide:
                                 const BorderSide(color: Colors.purpleAccent),
                           ),
@@ -85,7 +92,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0)),
+                                  BorderRadius.all(Radius.circular(40.0)),
                               borderSide:
                                   BorderSide(color: Colors.purpleAccent))),
                     ),
@@ -96,21 +103,18 @@ class _emailsignuppageState extends State<emailsignuppage> {
                   Container(
                     // color: Colors.grey[850],
                     child: TextFormField(
+                      style: TextStyle(color: Colors.white),
                       keyboardType: TextInputType.emailAddress,
+                      controller: _emailController,
                       validator: (item) {
                         return item!.contains("@") ? null : "Enter valid email";
-                      },
-                      onChanged: (item) {
-                        setState(() {
-                          signupemail = item;
-                        });
                       },
                       decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.grey[850],
                           enabledBorder: const OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
+                                BorderRadius.all(Radius.circular(40.0)),
                             borderSide:
                                 const BorderSide(color: Colors.purpleAccent),
                           ),
@@ -122,12 +126,11 @@ class _emailsignuppageState extends State<emailsignuppage> {
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0)),
+                                  BorderRadius.all(Radius.circular(40.0)),
                               borderSide:
                                   BorderSide(color: Colors.purpleAccent))),
                     ),
                   ),
-
                   SizedBox(
                     height: 20.0,
                   ),
@@ -135,23 +138,19 @@ class _emailsignuppageState extends State<emailsignuppage> {
                     // color: Colors.grey[850],
                     child: TextFormField(
                       keyboardType: TextInputType.text,
+                      controller: _passwordController,
                       obscureText: true,
                       validator: (item) {
                         return item!.length > 6
                             ? null
                             : "Password must be more than 6 characters";
                       },
-                      onChanged: (item) {
-                        setState(() {
-                          signuppassword = item;
-                        });
-                      },
                       style: TextStyle(color: Colors.grey),
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.grey[850],
                         enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderRadius: BorderRadius.all(Radius.circular(40.0)),
                           borderSide:
                               const BorderSide(color: Colors.purpleAccent),
                         ),
@@ -163,7 +162,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
                         ),
                         focusedBorder: const OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
+                                BorderRadius.all(Radius.circular(40.0)),
                             borderSide:
                                 const BorderSide(color: Colors.purpleAccent)),
                       ),
@@ -176,23 +175,19 @@ class _emailsignuppageState extends State<emailsignuppage> {
                     // color: Colors.grey[850],
                     child: TextFormField(
                       keyboardType: TextInputType.text,
+                      controller: _confpasswordController,
                       obscureText: true,
                       validator: (item) {
-                        return item! == signuppassword
+                        return item!.length > 6
                             ? null
                             : "Passwords do not match";
-                      },
-                      onChanged: (item) {
-                        setState(() {
-                          signupconfirmpassword = item;
-                        });
                       },
                       style: TextStyle(color: Colors.grey),
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.grey[850],
                         enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderRadius: BorderRadius.all(Radius.circular(40.0)),
                           borderSide:
                               const BorderSide(color: Colors.purpleAccent),
                         ),
@@ -204,7 +199,7 @@ class _emailsignuppageState extends State<emailsignuppage> {
                         ),
                         focusedBorder: const OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
+                                BorderRadius.all(Radius.circular(40.0)),
                             borderSide:
                                 const BorderSide(color: Colors.purpleAccent)),
                       ),
@@ -225,38 +220,73 @@ class _emailsignuppageState extends State<emailsignuppage> {
                   //     ),
                   //   ),
                   // ),
-                  // SizedBox(
-                  //   height: 20.0,
-                  // ),
-                  Container(
-                    height: 40.0,
-                    child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.deepPurpleAccent,
-                      color: Colors.purpleAccent,
-                      elevation: 7.0,
-                      child: GestureDetector(
-                        onTap: () {
-                          if (_formkey.currentState!.validate()) {}
-                        },
-                        child: Center(
-                          child: Text(
-                            'SIGN UP',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  ConstrainedBox(
+                    constraints: BoxConstraints.tightFor(
+                      width: size.width * 0.6,
+                      height: size.height * 0.06,
                     ),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            _register();
+                          }
+                        },
+                        child: Text(
+                          "Sign Up",
+                          style: TextStyle(
+                              color: Colors.white, fontSize: size.width * 0.04),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.purpleAccent,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(
+                                    size.width * 0.5)),
+                            side: BorderSide(
+                                width: size.width * 0.004,
+                                color: Colors.purpleAccent))),
                   ),
                 ],
               ),
             ),
           ),
-          Container(),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _register() async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+    String confpassword = _confpasswordController.text.trim();
+
+    if (password == confpassword) {
+      try {
+        final User? user = (await _auth.createUserWithEmailAndPassword(
+                email: email, password: password))
+            .user;
+
+        setState(() {
+          if (user != null) {
+            Fluttertoast.showToast(msg: "User Created");
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          }
+        });
+      } catch (e) {
+        Fluttertoast.showToast(msg: e.toString());
+      }
+    } else {
+      Fluttertoast.showToast(msg: "Passwords Dont Match");
+    }
   }
 }
