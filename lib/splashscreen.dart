@@ -51,12 +51,12 @@ class _Splash_ScreenState extends State<Splash_Screen> {
     super.initState();
     _controller = VideoPlayerController.asset("lib/assets/eScoreZLogo.mp4");
     _controller.initialize().then((_) {
-      _controller.setLooping(true);
-      Timer(Duration(seconds: 4), () {
+      _controller.setLooping(false);
+      Timer(Duration(seconds: 1), () {
         setState(() {
           _controller.play();
         });
-        Navigator.pushReplacement(
+        Navigator.push(
             context, MaterialPageRoute(builder: (context) => Login_Select()));
       });
     });

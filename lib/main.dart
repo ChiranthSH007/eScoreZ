@@ -6,6 +6,7 @@ import 'package:esportzzz/login_select_page.dart';
 import 'package:esportzzz/matchdetailpage.dart';
 import 'package:esportzzz/newsdetailpage.dart';
 import 'package:esportzzz/newshomepage.dart';
+import 'package:esportzzz/profilepage.dart';
 import 'package:esportzzz/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,5 +17,5 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  runApp(Splash_Screen());
+  runApp(ProfileScreen());
 }
