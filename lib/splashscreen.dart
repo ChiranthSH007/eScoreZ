@@ -1,10 +1,11 @@
 import 'dart:async';
 
+import 'package:esportzzz/homepage.dart';
 import 'package:esportzzz/login_select_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:video_player/video_player.dart';
 
 class Splash_Screen extends StatefulWidget {
   const Splash_Screen({Key? key}) : super(key: key);
@@ -14,27 +15,24 @@ class Splash_Screen extends StatefulWidget {
 }
 
 class _Splash_ScreenState extends State<Splash_Screen> {
-  late VideoPlayerController _controller;
-
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset("lib/assets/eScoreZLogo.mp4");
-    _controller.initialize().then((_) {
-      //_controller.setLooping(true);
-      _controller.play();
-    });
     Timer(Duration(seconds: 4), () {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => Login_Select()),
-          (Route<dynamic> rr) => false);
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        print(user);
+        if (user == null) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => Login_Select()),
+              (Route<dynamic> rr) => false);
+        } else {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => HomePage()),
+              (Route<dynamic> rr) => false);
+        }
+      });
     });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
   }
 
   // This widget is the root of your application.
@@ -49,16 +47,17 @@ class _Splash_ScreenState extends State<Splash_Screen> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: new Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xff1f1a30),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: SizedBox(
-                width: _controller.value.size.width * 0.5,
-                height: _controller.value.size.height * 0.52,
-                child: VideoPlayer(_controller),
+                width: MediaQuery.of(context).size.width * 0.6,
+                height: MediaQuery.of(context).size.height * 0.6,
+                child:
+                    Image(image: AssetImage("lib/assets/img/editedlogo.png")),
               ),
             ),
           ],

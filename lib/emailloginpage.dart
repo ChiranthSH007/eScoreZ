@@ -5,6 +5,7 @@ import 'package:esportzzz/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class emaillogin extends StatefulWidget {
   const emaillogin({Key? key}) : super(key: key);
@@ -24,170 +25,210 @@ class _emailloginState extends State<emaillogin> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-      ),
-      backgroundColor: Colors.black,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      backgroundColor: Color(0xff1f1a30),
+      body: Stack(
         children: [
-          Container(
-            child: Stack(
-              children: [
-                Container(
-                  padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                  child: Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 60.0,
+          _getToolbar(context),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: size.height * 0.05,
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                child: Text(
+                  'Login',
+                  style: GoogleFonts.nunito(
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
+                      fontSize: size.width * 0.135),
                 ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(15.0, 185.0, 0.0, 0.0),
-                  child: Text(
-                    'Please sign in to continue.',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      // fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
+                child: Text(
+                  'Please sign in to continue.',
+                  style: GoogleFonts.nunito(
+                      color: Colors.white, fontSize: size.width * 0.045),
                 ),
-              ],
-            ),
-          ),
-          Form(
-            key: _formKey,
-            child: Container(
-              padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-              child: Column(
-                children: [
-                  Container(
-                    // color: Colors.grey[850],
-                    child: TextFormField(
-                      style: TextStyle(color: Colors.white),
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (item) {
-                        return item!.contains("@") ? null : "Enter Valid Email";
-                      },
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey[850],
-                          enabledBorder: const OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40.0)),
-                            borderSide:
-                                const BorderSide(color: Colors.purpleAccent),
-                          ),
-                          labelText: 'Email',
-                          labelStyle: TextStyle(
-                            fontFamily: 'nunito',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                          focusedBorder: OutlineInputBorder(
+              ),
+              Form(
+                key: _formKey,
+                child: Container(
+                  padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        // color: Colors.grey[850],
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          keyboardType: TextInputType.emailAddress,
+                          controller: _emailController,
+                          validator: (item) {
+                            return item!.contains("@")
+                                ? null
+                                : "Enter valid email";
+                          },
+                          decoration: InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.email_outlined,
+                                color: Colors.white,
+                              ),
+                              filled: true,
+                              fillColor: Color(0xff39304d),
+                              enabledBorder: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(40.0)),
+                                borderSide:
+                                    const BorderSide(color: Colors.transparent),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(40.0)),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(40.0)),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              labelText: 'Email',
+                              labelStyle:
+                                  GoogleFonts.nunito(color: Colors.white),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(40.0)),
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent))),
+                          onTap: () {
+                            FocusScopeNode currentFocus =
+                                FocusScope.of(context);
+                            if (!currentFocus.hasPrimaryFocus) {
+                              currentFocus.unfocus();
+                            }
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Container(
+                        // color: Colors.grey[850],
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          keyboardType: TextInputType.text,
+                          controller: _passwordController,
+                          obscureText: true,
+                          validator: (item) {
+                            return item!.length > 6
+                                ? null
+                                : "Password must be more than 6 characters";
+                          },
+                          //style: TextStyle(color: Colors.grey),
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.password,
+                              color: Colors.white,
+                            ),
+                            filled: true,
+                            fillColor: Color(0xff39304d),
+                            enabledBorder: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(40.0)),
                               borderSide:
-                                  BorderSide(color: Colors.purpleAccent))),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Container(
-                    // color: Colors.grey[850],
-                    child: TextFormField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      keyboardType: TextInputType.text,
-                      validator: (item) {
-                        return item!.length > 6
-                            ? null
-                            : "Password must be more than 6 charecters";
-                      },
-                      style: TextStyle(color: Colors.grey),
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.grey[850],
-                        enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(40.0)),
-                          borderSide:
-                              const BorderSide(color: Colors.purpleAccent),
-                        ),
-                        labelText: 'Password',
-                        labelStyle: TextStyle(
-                          fontFamily: 'nunito',
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40.0)),
-                            borderSide:
-                                const BorderSide(color: Colors.purpleAccent)),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: 15.0, left: 20.0),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ForgotPassword()));
-                      },
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: Colors.purpleAccent,
-                          fontWeight: FontWeight.bold,
+                                  const BorderSide(color: Colors.transparent),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40.0)),
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40.0)),
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            labelText: 'Password',
+                            labelStyle: GoogleFonts.nunito(color: Colors.white),
+                            focusedBorder: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(40.0)),
+                                borderSide: const BorderSide(
+                                    color: Colors.transparent)),
+                          ),
+                          onTap: () {
+                            FocusScopeNode currentFocus =
+                                FocusScope.of(context);
+                            if (!currentFocus.hasPrimaryFocus) {
+                              currentFocus.unfocus();
+                            }
+                          },
                         ),
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  ConstrainedBox(
-                    constraints: BoxConstraints.tightFor(
-                      width: size.width * 0.6,
-                      height: size.height * 0.06,
-                    ),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _signinWithEmailPassword();
-                          }
-                        },
-                        child: Text(
-                          "Log In",
-                          style: TextStyle(
-                              color: Colors.white, fontSize: size.width * 0.04),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(top: 15.0, left: 20.0),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ForgotPassword()));
+                          },
+                          child: Text('Forgot Password?',
+                              style: GoogleFonts.nunito(
+                                color: Color(0xff0ef5e3),
+                              )),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.purpleAccent,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(
-                                    size.width * 0.5)),
-                            side: BorderSide(
-                                width: size.width * 0.004,
-                                color: Colors.purpleAccent))),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      ConstrainedBox(
+                        constraints: BoxConstraints.tightFor(
+                          width: size.width * 0.6,
+                          height: size.height * 0.06,
+                        ),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                _signinWithEmailPassword();
+                              }
+                            },
+                            child: Text("Log In",
+                                style: GoogleFonts.nunito(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold)),
+                            style: ElevatedButton.styleFrom(
+                                primary: Color(0xff0ef5e3),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: new BorderRadius.circular(
+                                        size.width * 0.5)),
+                                side: BorderSide(
+                                  width: size.width * 0.004,
+                                  color: Color(0xff0ef5e3),
+                                ))),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),
+    );
+  }
+
+  Container _getToolbar(BuildContext context) {
+    return new Container(
+      margin: new EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      child: new BackButton(color: Colors.white),
     );
   }
 
@@ -207,8 +248,10 @@ class _emailloginState extends State<emaillogin> {
 
       if (user != null) {
         Fluttertoast.showToast(msg: "Sign In Successfull");
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+            (route) => false);
       }
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());

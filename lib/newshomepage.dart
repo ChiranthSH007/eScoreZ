@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esportzzz/appbar.dart';
 import 'package:esportzzz/newstile.dart';
 import 'package:esportzzz/operations.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'appbar.dart';
 
 import 'navbar.dart';
@@ -14,26 +16,66 @@ class NewsHome extends StatefulWidget {
 }
 
 class _NewsHomeState extends State<NewsHome> {
-  //final Stream<QuerySnapshot> newstream =
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late String _uid;
+  _checkUserStatus() async {
+    final User? user = _auth.currentUser;
+    setState(() {
+      _uid = user!.uid;
+    });
+  }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    _checkUserStatus();
+    super.initState();
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: NavBar(),
         appBar: AppBar(
-          title: Center(child: Text('eScoreZ')),
-          titleTextStyle: TextStyle(fontSize: 40),
+          title: Row(
+            children: [
+              Image.asset(
+                "lib/assets/img/editedlogo.png",
+                height: 100,
+                width: 100,
+                fit: BoxFit.cover,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.13,
+              ),
+              Text(
+                "eScoreZ",
+                style: GoogleFonts.rowdies(fontSize: 25),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.16,
+              ),
+              Container(
+                width: 45,
+                height: 45,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: Colors.tealAccent),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.person,
+                    color: Colors.black,
+                  ),
+                  iconSize: 30,
+                ),
+              )
+            ],
+          ),
 
-          backgroundColor: Colors.grey[850],
+          backgroundColor: Color(0xff1f1a30),
+          shadowColor: Color(0xff1f1a30),
 
           // elevation: 15,
           // shadowColor: Colors.grey[200],
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xff1f1a30),
         body: SafeArea(
           child: StreamBuilder(
               stream: FirebaseFirestore.instance
@@ -53,10 +95,11 @@ class _NewsHomeState extends State<NewsHome> {
                     return Padding(
                       padding: const EdgeInsets.only(top: 12),
                       child: new NewsTile(
-                        title: data['title'],
-                        description: data['description'],
-                        imgurl: data['imgurl'],
-                      ),
+                          title: data['title'],
+                          description: data['description'],
+                          imgurl: data['imgurl'],
+                          uid: _uid,
+                          docid: document.id),
                     );
                   }).toList(),
                 );

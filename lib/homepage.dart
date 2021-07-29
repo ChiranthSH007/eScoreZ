@@ -29,10 +29,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Colors.black,
       body: _pages[_selectedindex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.grey.shade900,
+        backgroundColor: Color(0xff1f1a30),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.feed),
@@ -45,6 +44,7 @@ class _HomePageState extends State<HomePage> {
         ],
         selectedLabelStyle: TextStyle(fontSize: 13),
         currentIndex: _selectedindex,
+        selectedItemColor: Colors.tealAccent,
         unselectedItemColor: Colors.white,
         onTap: _ontapped,
       ),
@@ -66,12 +66,9 @@ class _MatchesHomePageState extends State<MatchesHomePage> {
   }
 
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        
-      ),
+      appBar: AppBar(),
       body: SafeArea(
           child: StreamBuilder(
         stream: FirebaseFirestore.instance

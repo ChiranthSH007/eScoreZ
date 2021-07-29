@@ -65,7 +65,6 @@ class _MyAppState extends State<MyApp> {
       title: 'eScoreZ',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.grey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: new Splash_Screen(),
