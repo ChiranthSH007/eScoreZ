@@ -31,7 +31,8 @@ dependencies:
   google_fonts: ^2.1.0
   flutter_signin_button: ^2.0.0
   fluttertoast: ^8.0.7
-  video_player: ^2.1.10
+  image_picker: ^0.8.1+3
+  image_cropper: ^1.4.1
     
 
 
@@ -54,9 +55,11 @@ flutter:
     - lib/assets/img/sen-logo.png
     - lib/assets/img/Fnatic-logo.jpg
     - lib/assets/img/backround.jpeg
-    - lib/assets/eScoreZLogo.mp4
+    - lib/assets/img/editedlogo.png
     - lib/assets/img/forgot-password.png
     - lib/assets/img/forgotpassword.png
+    - lib/assets/img/backround.png
+    - lib/assets/img/editedlogowithname.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

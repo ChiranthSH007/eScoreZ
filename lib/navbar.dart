@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'emailloginpage.dart';
 import 'emailsignuppage.dart';
@@ -10,6 +11,8 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
+  User? userdetails = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -17,7 +20,7 @@ class _NavBarState extends State<NavBar> {
         children: [
           UserAccountsDrawerHeader(
             accountName: Text(
-              'Uzumaki Naruto',
+              userdetails!.displayName.toString(),
               style: TextStyle(color: Colors.black),
             ),
             accountEmail: Text(

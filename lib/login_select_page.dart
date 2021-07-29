@@ -15,28 +15,22 @@ class _Login_SelectState extends State<Login_Select> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff1f1a30),
       body: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              alignment: Alignment.center,
-              height: size.height * 0.6,
-              child: Text(
-                "EZ",
-                style:
-                    TextStyle(fontSize: size.height * 0.2, color: Colors.white),
+            Center(
+              child: Container(
+                alignment: Alignment.center,
+                height: size.height * 0.6,
+                width: size.width * 0.9,
+                child: Image(
+                  image: AssetImage("lib/assets/img/editedlogo.png"),
+                ),
               ),
             ),
-            // Container(
-            //   margin: EdgeInsets.symmetric(vertical: size.height * 0.02),
-            //   height: size.height * 0.006,
-            //   width: size.width * 0.95,
-            //   color: Colors.grey,
-            // ),
-
             ConstrainedBox(
               constraints: BoxConstraints.tightFor(
                   width: size.width * 0.6, height: size.height * 0.06),
@@ -48,10 +42,10 @@ class _Login_SelectState extends State<Login_Select> {
                   child: Text(
                     "Log In",
                     style: TextStyle(
-                        color: Colors.white, fontSize: size.width * 0.04),
+                        color: Colors.black, fontSize: size.width * 0.04),
                   ),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.purpleAccent,
+                      primary: Color(0xff0ef5e3),
                       shape: RoundedRectangleBorder(
                           borderRadius:
                               new BorderRadius.circular(size.width * 0.5)))),
@@ -73,13 +67,14 @@ class _Login_SelectState extends State<Login_Select> {
                         color: Colors.white, fontSize: size.width * 0.04),
                   ),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
+                      primary: Color(0xff1f1a30),
                       shape: RoundedRectangleBorder(
                           borderRadius:
                               new BorderRadius.circular(size.width * 0.5)),
                       side: BorderSide(
-                          width: size.width * 0.004,
-                          color: Colors.purpleAccent))),
+                        width: size.width * 0.004,
+                        color: Colors.tealAccent,
+                      ))),
             ),
           ],
         ),
