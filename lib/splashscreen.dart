@@ -17,17 +17,6 @@ class Splash_Screen extends StatefulWidget {
 class _Splash_ScreenState extends State<Splash_Screen> {
   void initState() {
     super.initState();
-<<<<<<< HEAD
-    _controller = VideoPlayerController.asset("lib/assets/eScoreZLogo.mp4");
-    _controller.initialize().then((_) {
-      _controller.setLooping(false);
-      Timer(Duration(seconds: 1), () {
-        setState(() {
-          _controller.play();
-        });
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Login_Select()));
-=======
     Timer(Duration(seconds: 4), () {
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
         print(user);
@@ -42,7 +31,6 @@ class _Splash_ScreenState extends State<Splash_Screen> {
               MaterialPageRoute(builder: (_) => HomePage()),
               (Route<dynamic> rr) => false);
         }
->>>>>>> 1fe04bb6aca57f4744984e1318f47482b88173bd
       });
     });
   }
