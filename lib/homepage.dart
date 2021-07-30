@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
             label: 'News',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.save_alt_rounded),
+            icon: Icon(Icons.bookmark_outline),
             label: 'Saved',
           ),
         ],
@@ -68,7 +68,6 @@ class _MatchesHomePageState extends State<MatchesHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(),
       body: SafeArea(
           child: StreamBuilder(
         stream: FirebaseFirestore.instance

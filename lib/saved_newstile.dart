@@ -9,12 +9,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// ignore: must_be_immutable
-class NewsTile extends StatefulWidget {
-  String title, description, imgurl, docid, uid;
-  NewsTile({
+class SavedNewsTile extends StatefulWidget {
+  String title, description, imgurl, docid;
+
+  SavedNewsTile({
     Key? key,
-    required this.uid,
     required this.imgurl,
     required this.docid,
     required this.title,
@@ -22,73 +21,10 @@ class NewsTile extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _NewsTileState createState() => _NewsTileState();
+  _SavedNewsTileState createState() => _SavedNewsTileState();
 }
 
-class _NewsTileState extends State<NewsTile> {
-  Color _savebtn = Colors.white;
-  IconData _saveIcn = Icons.bookmark_outline;
-
-  _checkActionStatus() async {
-    var docref = FirebaseFirestore.instance.collection("newsdetails");
-
-    var doc = await docref.doc(widget.docid).get();
-    Map<String, dynamic>? data = doc.data();
-    var saveCheckList = data?["SavedIDs"] ?? 0; // Default value if its null
-    if (saveCheckList != 0) {
-      if (saveCheckList.contains(widget.uid) == true) {
-        setState(() {
-          _savebtn = Colors.tealAccent;
-          _saveIcn = Icons.bookmark;
-        });
-      }
-    }
-  }
-
-  _saveAndUnsave() async {
-    CollectionReference docref =
-        FirebaseFirestore.instance.collection("newsdetails");
-    var doc = await docref.doc(widget.docid).get();
-    Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
-    var saveCheckList = data?["SavedIDs"] ?? 0;
-    if (saveCheckList == 0) {
-      await docref.doc(widget.uid).update({
-        "SavedIDs": FieldValue.arrayUnion([widget.uid])
-      });
-      setState(() {
-        _saveIcn = Icons.bookmark;
-        _savebtn = Colors.tealAccent;
-        _checkActionStatus();
-      });
-    } else {
-      if (saveCheckList.contains(widget.uid) == true) {
-        await docref.doc(widget.docid).update({
-          "SavedIDs": FieldValue.arrayRemove([widget.uid])
-        });
-        setState(() {
-          _saveIcn = Icons.bookmark_outline;
-          _savebtn = Colors.white;
-          _checkActionStatus();
-        });
-      } else {
-        await docref.doc(widget.docid).update({
-          "SavedIDs": FieldValue.arrayUnion([widget.uid])
-        });
-        setState(() {
-          _saveIcn = Icons.bookmark;
-          _savebtn = Colors.tealAccent;
-          _checkActionStatus();
-        });
-      }
-    }
-  }
-
-  @override
-  void initState() {
-    _checkActionStatus();
-    super.initState();
-  }
-
+class _SavedNewsTileState extends State<SavedNewsTile> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -107,7 +43,7 @@ class _NewsTileState extends State<NewsTile> {
       child: Container(
         color: Color(0xff313243),
         width: size.width * 0.2,
-        height: size.height * 0.2,
+        height: size.height * 0.14,
         padding: EdgeInsets.only(top: 8),
         child: Column(
           children: [
@@ -165,42 +101,6 @@ class _NewsTileState extends State<NewsTile> {
                   ),
                 ),
               ],
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-              child: Row(
-                children: [
-                  Text(
-                    "24h | abcd.com",
-                    style: GoogleFonts.nunito(color: Colors.grey),
-                  ),
-                  SizedBox(
-                    width: size.width * 0.36,
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.favorite,
-                      color: Colors.pink,
-                    ),
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        _saveAndUnsave();
-                      },
-                      icon: Icon(
-                        _saveIcn,
-                        color: _savebtn,
-                      )),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.share,
-                      color: Colors.white,
-                    ),
-                  )
-                ],
-              ),
             ),
           ],
         ),
