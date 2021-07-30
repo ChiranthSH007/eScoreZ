@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esportzzz/appbar.dart';
 import 'package:esportzzz/newstile.dart';
-import 'package:esportzzz/operations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -84,7 +83,9 @@ class _NewsHomeState extends State<NewsHome> {
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      color: Colors.tealAccent,
+                    ),
                   );
                 }
                 return ListView(

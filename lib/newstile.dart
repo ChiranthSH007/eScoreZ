@@ -26,20 +26,116 @@ class NewsTile extends StatefulWidget {
 }
 
 class _NewsTileState extends State<NewsTile> {
-  Color _savebtn = Colors.grey;
+  Color _saveClr = Colors.white;
   IconData _saveIcn = Icons.bookmark_outline;
+  Color _likeClr = Colors.pinkAccent;
+  IconData _likeIcn = Icons.favorite_outline;
 
-  _save() async {
-    CollectionReference addSave = FirebaseFirestore.instance
-        .collection("newsdetails")
-        .doc(widget.docid)
-        .collection("SavedIDs");
+  _checkActionStatus() async {
+    var docref = FirebaseFirestore.instance.collection("newsdetails");
 
-    setState(() async {
-      await addSave.add({'usrId': widget.uid});
-      _saveIcn = Icons.bookmark;
-      _savebtn = Colors.tealAccent;
-    });
+    var doc = await docref.doc(widget.docid).get();
+    Map<String, dynamic>? data = doc.data();
+    var saveCheckList = data?["SavedIDs"] ?? 0; // Default value if its null
+    var likeCheckList = data?["LikeIDs"] ?? 0;
+    if (saveCheckList != 0) {
+      if (saveCheckList.contains(widget.uid) == true) {
+        setState(() {
+          _saveClr = Colors.tealAccent;
+          _saveIcn = Icons.bookmark;
+        });
+      }
+    }
+    if (likeCheckList != 0) {
+      if (likeCheckList.contains(widget.uid) == true) {
+        setState(() {
+          _likeClr = Colors.pinkAccent;
+          _likeIcn = Icons.favorite;
+        });
+      }
+    }
+  }
+
+  _saveAndUnsave() async {
+    CollectionReference docref =
+        FirebaseFirestore.instance.collection("newsdetails");
+    var doc = await docref.doc(widget.docid).get();
+    Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+    var saveCheckList = data?["SavedIDs"] ?? 0;
+    if (saveCheckList == 0) {
+      await docref.doc(widget.uid).update({
+        "SavedIDs": FieldValue.arrayUnion([widget.uid])
+      });
+      setState(() {
+        _saveIcn = Icons.bookmark;
+        _saveClr = Colors.tealAccent;
+        _checkActionStatus();
+      });
+    } else {
+      if (saveCheckList.contains(widget.uid) == true) {
+        await docref.doc(widget.docid).update({
+          "SavedIDs": FieldValue.arrayRemove([widget.uid])
+        });
+        setState(() {
+          _saveIcn = Icons.bookmark_outline;
+          _saveClr = Colors.white;
+          _checkActionStatus();
+        });
+      } else {
+        await docref.doc(widget.docid).update({
+          "SavedIDs": FieldValue.arrayUnion([widget.uid])
+        });
+        setState(() {
+          _saveIcn = Icons.bookmark;
+          _saveClr = Colors.tealAccent;
+          _checkActionStatus();
+        });
+      }
+    }
+  }
+
+  _likeAndDislike() async {
+    CollectionReference docref =
+        FirebaseFirestore.instance.collection("newsdetails");
+    var doc = await docref.doc(widget.docid).get();
+    Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+    var likeCheckList = data?["LikeIDs"] ?? 0;
+    if (likeCheckList == 0) {
+      await docref.doc(widget.uid).update({
+        "LikeIDs": FieldValue.arrayUnion([widget.uid])
+      });
+      setState(() {
+        _likeIcn = Icons.favorite;
+        _likeClr = Colors.pinkAccent;
+        _checkActionStatus();
+      });
+    } else {
+      if (likeCheckList.contains(widget.uid) == true) {
+        await docref.doc(widget.docid).update({
+          "LikeIDs": FieldValue.arrayRemove([widget.uid])
+        });
+        setState(() {
+          _likeIcn = Icons.favorite_outline;
+          _likeClr = Colors.pinkAccent;
+          _checkActionStatus();
+        });
+      } else {
+        await docref.doc(widget.docid).update({
+          "LikeIDs": FieldValue.arrayUnion([widget.uid])
+        });
+        setState(() {
+          _likeIcn = Icons.favorite;
+          _likeClr = Colors.pinkAccent;
+          _checkActionStatus();
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    _checkActionStatus();
+    super.initState();
   }
 
   @override
@@ -57,6 +153,7 @@ class _NewsTileState extends State<NewsTile> {
               new FadeTransition(opacity: animation, child: child),
         ),
       ),
+      onDoubleTap: () => _likeAndDislike(),
       child: Container(
         color: Color(0xff313243),
         width: size.width * 0.2,
@@ -131,19 +228,21 @@ class _NewsTileState extends State<NewsTile> {
                     width: size.width * 0.36,
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _likeAndDislike();
+                    },
                     icon: Icon(
-                      Icons.favorite,
-                      color: Colors.pink,
+                      _likeIcn,
+                      color: _likeClr,
                     ),
                   ),
                   IconButton(
                       onPressed: () {
-                        _save();
+                        _saveAndUnsave();
                       },
                       icon: Icon(
                         _saveIcn,
-                        color: Colors.white,
+                        color: _saveClr,
                       )),
                   IconButton(
                     onPressed: () {},
