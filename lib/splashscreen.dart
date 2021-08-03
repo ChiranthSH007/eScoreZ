@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:esportzzz/homepage.dart';
-import 'package:esportzzz/login_select_page.dart';
+import 'package:esportzzz/Main_Pages/homepage.dart';
+import 'package:esportzzz/Login_Auth/login_select_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

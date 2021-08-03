@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:esportzzz/appbar.dart';
-import 'package:esportzzz/newstile.dart';
+import 'package:esportzzz/News_pages/newstile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'appbar.dart';
 
-import 'navbar.dart';
+import '../Main_Pages/navbar.dart';
 import 'newsdetailpage.dart';
 
 class NewsHome extends StatefulWidget {

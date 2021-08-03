@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:esportzzz/matchdetailpage.dart';
+import 'package:esportzzz/Score_Pages/matchdetailpage.dart';
 import 'package:flutter/material.dart';
 
 class MatchRow extends StatefulWidget {

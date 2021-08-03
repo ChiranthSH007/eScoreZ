@@ -1,5 +1,5 @@
-import 'package:esportzzz/emailloginpage.dart';
-import 'package:esportzzz/emailsignuppage.dart';
+import 'package:esportzzz/Login_Auth/emailloginpage.dart';
+import 'package:esportzzz/Login_Auth/emailsignuppage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 

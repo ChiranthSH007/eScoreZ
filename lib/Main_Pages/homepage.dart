@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:esportzzz/MatchRow.dart';
-import 'package:esportzzz/appbar.dart';
-import 'package:esportzzz/navbar.dart';
-import 'package:esportzzz/newshomepage.dart';
-import 'package:esportzzz/savedpage.dart';
+import 'package:esportzzz/Score_Pages/MatchRow.dart';
+import 'package:esportzzz/Main_Pages/navbar.dart';
+import 'package:esportzzz/News_pages/newshomepage.dart';
+import 'package:esportzzz/News_pages/savedpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'emailloginpage.dart';
-import 'emailsignuppage.dart';
+import '../Login_Auth/emailloginpage.dart';
+import '../Login_Auth/emailsignuppage.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);

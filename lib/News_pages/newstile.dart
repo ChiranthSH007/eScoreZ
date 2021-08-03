@@ -2,9 +2,8 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:esportzzz/appbar.dart';
-import 'package:esportzzz/matchdetailpage.dart';
-import 'package:esportzzz/newsdetailpage.dart';
+import 'package:esportzzz/Score_Pages/matchdetailpage.dart';
+import 'package:esportzzz/News_pages/newsdetailpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
