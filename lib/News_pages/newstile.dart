@@ -30,6 +30,11 @@ class _NewsTileState extends State<NewsTile> {
   Color _likeClr = Colors.pinkAccent;
   IconData _likeIcn = Icons.favorite_outline;
 
+  onGoBack(dynamic value) {
+    _checkActionStatus();
+    setState(() {});
+  }
+
   _checkActionStatus() async {
     var docref = FirebaseFirestore.instance.collection("newsdetails");
 
@@ -141,17 +146,22 @@ class _NewsTileState extends State<NewsTile> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(
-        new PageRouteBuilder(
-          pageBuilder: (_, __, ___) => new NewsDetail(
-            title: widget.title,
-            description: widget.description,
-            imgurl: widget.imgurl,
-          ),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-              new FadeTransition(opacity: animation, child: child),
-        ),
-      ),
+      onTap: () => Navigator.of(context)
+          .push(
+            new PageRouteBuilder(
+              pageBuilder: (_, __, ___) => new NewsDetail(
+                docid: widget.docid,
+                uid: widget.uid,
+                title: widget.title,
+                description: widget.description,
+                imgurl: widget.imgurl,
+              ),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) =>
+                      new FadeTransition(opacity: animation, child: child),
+            ),
+          )
+          .then(onGoBack),
       onDoubleTap: () => _likeAndDislike(),
       child: Container(
         color: Color(0xff313243),
@@ -165,11 +175,18 @@ class _NewsTileState extends State<NewsTile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(width: size.width * 0.02),
-                CachedNetworkImage(
-                  imageUrl: widget.imgurl,
-                  height: size.height * 0.12,
-                  width: size.width * 0.30,
-                  fit: BoxFit.cover,
+                Container(
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) => Container(
+                      child: Image(
+                        image: AssetImage("lib/assets/img/defaultimage.png"),
+                      ),
+                    ),
+                    imageUrl: widget.imgurl,
+                    height: size.height * 0.12,
+                    width: size.width * 0.30,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 SizedBox(
                   width: size.width * 0.02,

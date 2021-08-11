@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
     NewsHome(),
     SavedPage(),
   ];
+
   void _ontapped(int index) {
     setState(() {
       _selectedindex = index;

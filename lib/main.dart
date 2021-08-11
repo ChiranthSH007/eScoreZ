@@ -6,7 +6,7 @@ import 'package:esportzzz/Login_Auth/login_select_page.dart';
 import 'package:esportzzz/Score_Pages/matchdetailpage.dart';
 import 'package:esportzzz/News_pages/newsdetailpage.dart';
 import 'package:esportzzz/News_pages/newshomepage.dart';
-import 'package:esportzzz/splashscreen.dart';
+import 'package:esportzzz/Main_Pages/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

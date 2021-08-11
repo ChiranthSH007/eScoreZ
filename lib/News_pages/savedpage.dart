@@ -95,6 +95,7 @@ class _SavedPageState extends State<SavedPage> {
                     return Padding(
                       padding: const EdgeInsets.only(top: 12),
                       child: new SavedNewsTile(
+                          uid: _uid,
                           title: data['title'],
                           description: data['description'],
                           imgurl: data['imgurl'],

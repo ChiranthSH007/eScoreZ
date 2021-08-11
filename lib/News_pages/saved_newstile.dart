@@ -9,10 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SavedNewsTile extends StatefulWidget {
-  String title, description, imgurl, docid;
+  String title, description, imgurl, docid, uid;
 
   SavedNewsTile({
     Key? key,
+    required this.uid,
     required this.imgurl,
     required this.docid,
     required this.title,
@@ -31,6 +32,8 @@ class _SavedNewsTileState extends State<SavedNewsTile> {
       onTap: () => Navigator.of(context).push(
         new PageRouteBuilder(
           pageBuilder: (_, __, ___) => new NewsDetail(
+            docid: widget.docid,
+            uid: widget.uid,
             title: widget.title,
             description: widget.description,
             imgurl: widget.imgurl,

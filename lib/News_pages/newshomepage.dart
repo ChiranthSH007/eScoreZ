@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esportzzz/News_pages/newstile.dart';
+import 'package:esportzzz/admin_test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:paginate_firestore/paginate_firestore.dart';
 
 import '../Main_Pages/navbar.dart';
 import 'newsdetailpage.dart';
@@ -14,6 +16,7 @@ class NewsHome extends StatefulWidget {
 
 class _NewsHomeState extends State<NewsHome> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  ScrollController controller = ScrollController();
   late String _uid;
   _checkUserStatus() async {
     final User? user = _auth.currentUser;
@@ -24,8 +27,8 @@ class _NewsHomeState extends State<NewsHome> {
 
   @override
   void initState() {
-    _checkUserStatus();
     super.initState();
+    _checkUserStatus();
   }
 
   Widget build(BuildContext context) {
@@ -55,7 +58,13 @@ class _NewsHomeState extends State<NewsHome> {
                 decoration: BoxDecoration(
                     shape: BoxShape.circle, color: Colors.tealAccent),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => AddPost(),
+                        ));
+                  },
                   icon: Icon(
                     Icons.person,
                     color: Colors.black,
@@ -74,35 +83,55 @@ class _NewsHomeState extends State<NewsHome> {
         ),
         backgroundColor: Color(0xff1f1a30),
         body: SafeArea(
-          child: StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection('newsdetails')
-                  .snapshots(includeMetadataChanges: true),
-              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.tealAccent,
-                    ),
-                  );
-                }
-                return ListView(
-                  children:
-                      snapshot.data!.docs.map((DocumentSnapshot document) {
-                    Map<String, dynamic> data =
-                        document.data() as Map<String, dynamic>;
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 12),
-                      child: new NewsTile(
-                          title: data['title'],
-                          description: data['description'],
-                          imgurl: data['imgurl'],
-                          uid: _uid,
-                          docid: document.id),
-                    );
-                  }).toList(),
-                );
-              }),
+          child: PaginateFirestore(
+            itemBuilderType: PaginateBuilderType.listView,
+            itemBuilder: (index, context, documentSnapshot) {
+              final data = documentSnapshot.data() as Map?;
+              return Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: new NewsTile(
+                    title: data!['title'],
+                    description: data['description'],
+                    imgurl: data['imgurl'],
+                    uid: _uid,
+                    docid: documentSnapshot.id),
+              );
+            },
+            query: FirebaseFirestore.instance.collection('newsdetails'),
+            isLive: true,
+            itemsPerPage: 4,
+          ),
         ));
   }
 }
+
+
+// StreamBuilder(
+//               stream: FirebaseFirestore.instance
+//                   .collection('newsdetails')
+//                   .snapshots(includeMetadataChanges: true),
+//               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+//                 if (!snapshot.hasData) {
+//                   return Center(
+//                     child: CircularProgressIndicator(
+//                       color: Colors.tealAccent,
+//                     ),
+//                   );
+//                 }
+//                 return ListView(
+//                   children:
+//                       snapshot.data!.docs.map((DocumentSnapshot document) {
+//                     Map<String, dynamic> data =
+//                         document.data() as Map<String, dynamic>;
+//                     return Padding(
+//                       padding: const EdgeInsets.only(top: 12),
+//                       child: new NewsTile(
+//                           title: data['title'],
+//                           description: data['description'],
+//                           imgurl: data['imgurl'],
+//                           uid: _uid,
+//                           docid: document.id),
+//                     );
+//                   }).toList(),
+//                 );
+//               }),
