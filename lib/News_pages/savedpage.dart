@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:esportzzz/newstile.dart';
-import 'package:esportzzz/saved_newstile.dart';
+import 'package:esportzzz/News_pages/newstile.dart';
+import 'package:esportzzz/News_pages/saved_newstile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -95,6 +95,7 @@ class _SavedPageState extends State<SavedPage> {
                     return Padding(
                       padding: const EdgeInsets.only(top: 12),
                       child: new SavedNewsTile(
+                          uid: _uid,
                           title: data['title'],
                           description: data['description'],
                           imgurl: data['imgurl'],

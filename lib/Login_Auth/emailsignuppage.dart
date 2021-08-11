@@ -1,25 +1,27 @@
-import 'dart:ui';
-
-import 'package:esportzzz/forgotpasswordpage.dart';
-import 'package:esportzzz/homepage.dart';
+import 'package:esportzzz/Main_Pages/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class emaillogin extends StatefulWidget {
-  const emaillogin({Key? key}) : super(key: key);
+class emailsignuppage extends StatefulWidget {
+  const emailsignuppage({Key? key}) : super(key: key);
 
   @override
-  _emailloginState createState() => _emailloginState();
+  _emailsignuppageState createState() => _emailsignuppageState();
 }
 
-class _emailloginState extends State<emaillogin> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class _emailsignuppageState extends State<emailsignuppage> {
   bool isLoading = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final TextEditingController _confpasswordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,29 +30,32 @@ class _emailloginState extends State<emaillogin> {
       backgroundColor: Color(0xff1f1a30),
       body: Stack(
         children: [
-          _getToolbar(context),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: size.height * 0.05,
-              ),
               Container(
-                padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                child: Text(
-                  'Login',
-                  style: GoogleFonts.nunito(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: size.width * 0.135),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-                child: Text(
-                  'Please sign in to continue.',
-                  style: GoogleFonts.nunito(
-                      color: Colors.white, fontSize: size.width * 0.045),
+                child: Stack(
+                  children: [
+                    _getToolbar(context),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                      child: Text(
+                        'Sign UP',
+                        style: GoogleFonts.nunito(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: size.width * 0.135),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(15.0, 185.0, 0.0, 0.0),
+                      child: Text(
+                        'Welcome to eScoreZ.',
+                        style: GoogleFonts.nunito(
+                            color: Colors.white, fontSize: size.width * 0.045),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Form(
@@ -59,6 +64,60 @@ class _emailloginState extends State<emaillogin> {
                   padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                   child: Column(
                     children: [
+                      Container(
+                        // color: Colors.grey[850],
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          controller: _userNameController,
+                          keyboardType: TextInputType.name,
+                          validator: (item) {
+                            return item!.isNotEmpty
+                                ? null
+                                : "Username should not be empty";
+                          },
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.person_outline,
+                              color: Colors.white,
+                            ),
+                            filled: true,
+                            fillColor: Color(0xff39304d),
+                            enabledBorder: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40.0)),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                            ),
+                            labelText: 'User Name',
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40.0)),
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40.0)),
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            labelStyle: GoogleFonts.nunito(color: Colors.white),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40.0)),
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                          ),
+                          onTap: () {
+                            FocusScopeNode currentFocus =
+                                FocusScope.of(context);
+                            if (!currentFocus.hasPrimaryFocus) {
+                              currentFocus.unfocus();
+                            }
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
                       Container(
                         // color: Colors.grey[850],
                         child: TextFormField(
@@ -172,22 +231,59 @@ class _emailloginState extends State<emaillogin> {
                         height: 20.0,
                       ),
                       Container(
-                        padding: EdgeInsets.only(top: 15.0, left: 20.0),
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ForgotPassword()));
+                        // color: Colors.grey[850],
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          keyboardType: TextInputType.text,
+                          controller: _confpasswordController,
+                          obscureText: true,
+                          validator: (item) {
+                            return item!.length > 6
+                                ? null
+                                : "Passwords do not match";
                           },
-                          child: Text('Forgot Password?',
-                              style: GoogleFonts.nunito(
-                                color: Color(0xff0ef5e3),
-                              )),
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.lock_open,
+                              color: Colors.white,
+                            ),
+                            filled: true,
+                            fillColor: Color(0xff39304d),
+                            enabledBorder: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40.0)),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40.0)),
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40.0)),
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            labelText: 'Confirm Password',
+                            labelStyle: GoogleFonts.nunito(color: Colors.white),
+                            focusedBorder: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(40.0)),
+                                borderSide: const BorderSide(
+                                    color: Colors.transparent)),
+                          ),
+                          onTap: () {
+                            FocusScopeNode currentFocus =
+                                FocusScope.of(context);
+                            if (!currentFocus.hasPrimaryFocus) {
+                              currentFocus.unfocus();
+                            }
+                          },
                         ),
                       ),
                       SizedBox(
-                        height: 20.0,
+                        height: size.height * 0.055,
                       ),
                       ConstrainedBox(
                         constraints: BoxConstraints.tightFor(
@@ -197,13 +293,15 @@ class _emailloginState extends State<emaillogin> {
                         child: ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                _signinWithEmailPassword();
+                                _register();
                               }
                             },
-                            child: Text("Log In",
-                                style: GoogleFonts.nunito(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold)),
+                            child: Text(
+                              "Sign Up",
+                              style: GoogleFonts.nunito(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                            ),
                             style: ElevatedButton.styleFrom(
                                 primary: Color(0xff0ef5e3),
                                 shape: RoundedRectangleBorder(
@@ -239,22 +337,34 @@ class _emailloginState extends State<emaillogin> {
     super.dispose();
   }
 
-  _signinWithEmailPassword() async {
-    try {
-      final User? user = (await _firebaseAuth.signInWithEmailAndPassword(
-              email: _emailController.text.trim(),
-              password: _passwordController.text.trim()))
-          .user;
+  void _register() async {
+    String uname = _userNameController.text.trim();
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+    String confpassword = _confpasswordController.text.trim();
+    User? userdetails = FirebaseAuth.instance.currentUser;
 
-      if (user != null) {
-        Fluttertoast.showToast(msg: "Sign In Successfull");
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-            (route) => false);
+    if (password == confpassword) {
+      try {
+        final User? user = (await _auth.createUserWithEmailAndPassword(
+                email: email, password: password))
+            .user;
+        // userdetails!.updateDisplayName(uname);
+        setState(() {
+          if (user != null) {
+            userdetails!.updateDisplayName(uname);
+            Fluttertoast.showToast(msg: "User Created");
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+                (route) => false);
+          }
+        });
+      } catch (e) {
+        Fluttertoast.showToast(msg: e.toString());
       }
-    } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
+    } else {
+      Fluttertoast.showToast(msg: "Passwords Dont Match");
     }
   }
 }

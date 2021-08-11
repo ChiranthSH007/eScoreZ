@@ -1,4 +1,4 @@
-import 'package:esportzzz/MatchRow.dart';
+import 'package:esportzzz/Score_Pages/MatchRow.dart';
 import 'package:flutter/material.dart';
 
 class matchDetailsPage extends StatefulWidget {
