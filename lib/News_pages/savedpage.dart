@@ -31,7 +31,7 @@ class _SavedPageState extends State<SavedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xff1f1a30),
+        backgroundColor: Color(0xff313243),
         appBar: AppBar(
           title: Row(
             children: [

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:esportzzz/Score_Pages/MatchRow.dart';
 import 'package:esportzzz/Main_Pages/navbar.dart';
 import 'package:esportzzz/News_pages/newshomepage.dart';
@@ -15,39 +16,68 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedindex = 0;
+  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   List<Widget> _pages = [
     NewsHome(),
     SavedPage(),
   ];
 
-  void _ontapped(int index) {
-    setState(() {
-      _selectedindex = index;
-    });
-  }
+  // // void _ontapped(int index) {
+  //   setState(() {
+  //     _selectedindex = index;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: _pages[_selectedindex],
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xff1f1a30),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.feed),
-            label: 'News',
+      bottomNavigationBar: CurvedNavigationBar(
+        key: _bottomNavigationKey,
+        index: 0,
+        height: 55.0,
+        items: <Widget>[
+          Icon(
+            Icons.save,
+            size: 25,
+            color: Colors.tealAccent,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark_outline),
-            label: 'Saved',
+          Icon(
+            Icons.bookmark_outlined,
+            size: 25,
+            color: Colors.tealAccent,
           ),
         ],
-        selectedLabelStyle: TextStyle(fontSize: 13),
-        currentIndex: _selectedindex,
-        selectedItemColor: Colors.tealAccent,
-        unselectedItemColor: Colors.white,
-        onTap: _ontapped,
+        color: Color(0xff1f1a30),
+        buttonBackgroundColor: Color(0xff1f1a30),
+        backgroundColor: Color(0xff313243),
+        animationCurve: Curves.easeInOut,
+        animationDuration: Duration(milliseconds: 600),
+        onTap: (index) {
+          setState(() {
+            _selectedindex = index;
+          });
+        },
+        letIndexChange: (index) => true,
       ),
+      //    BottomNavigationBar(
+      //   backgroundColor: Color(0xff1f1a30),
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.feed),
+      //       label: 'News',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.bookmark_outline),
+      //       label: 'Saved',
+      //     ),
+      //   ],
+      //   selectedLabelStyle: TextStyle(fontSize: 13),
+      //   currentIndex: _selectedindex,
+      //   selectedItemColor: Colors.tealAccent,
+      //   unselectedItemColor: Colors.white,
+      //   onTap: _ontapped,
+      // ),
     );
   }
 }

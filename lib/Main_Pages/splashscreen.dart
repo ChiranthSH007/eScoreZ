@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Splash_Screen extends StatefulWidget {
   const Splash_Screen({Key? key}) : super(key: key);
@@ -25,10 +26,19 @@ class _Splash_ScreenState extends State<Splash_Screen> {
               context,
               MaterialPageRoute(builder: (_) => Login_Select()),
               (Route<dynamic> rr) => false);
-        } else {
+        } else if (user.emailVerified) {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (_) => HomePage()),
+              (Route<dynamic> rr) => false);
+        } else if (user.emailVerified == false) {
+          Fluttertoast.showToast(
+              msg: "Email not verified",
+              backgroundColor: Colors.grey[400],
+              textColor: Colors.black);
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => Login_Select()),
               (Route<dynamic> rr) => false);
         }
       });

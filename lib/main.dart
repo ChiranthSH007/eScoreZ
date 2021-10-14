@@ -1,6 +1,7 @@
 import 'package:esportzzz/Login_Auth/emailloginpage.dart';
 import 'package:esportzzz/Login_Auth/emailsignuppage.dart';
 import 'package:esportzzz/Login_Auth/forgotpasswordpage.dart';
+import 'package:esportzzz/Login_Auth/email_vrfy.dart';
 import 'package:esportzzz/Main_Pages/homepage.dart';
 import 'package:esportzzz/Login_Auth/login_select_page.dart';
 import 'package:esportzzz/Score_Pages/matchdetailpage.dart';
