@@ -75,7 +75,7 @@ class _NewsHomeState extends State<NewsHome> {
             ],
           ),
 
-          backgroundColor: Color(0xff1f1a30),
+          
           shadowColor: Color(0xff1f1a30),
 
           // elevation: 15,
