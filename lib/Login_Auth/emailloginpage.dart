@@ -200,10 +200,12 @@ class _emailloginState extends State<emaillogin> {
                                 _signinWithEmailPassword();
                               }
                             },
-                            child: Text("Log In",
-                                style: GoogleFonts.nunito(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold)),
+                            child: Text(
+                              "Log In",
+                              style: GoogleFonts.nunito(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                            ),
                             style: ElevatedButton.styleFrom(
                                 primary: Color(0xff0ef5e3),
                                 shape: RoundedRectangleBorder(
@@ -245,8 +247,9 @@ class _emailloginState extends State<emaillogin> {
               email: _emailController.text.trim(),
               password: _passwordController.text.trim()))
           .user;
+      await user!.reload();
 
-      if (user != null) {
+      if (user.emailVerified) {
         Fluttertoast.showToast(msg: "Sign In Successfull");
         Navigator.pushAndRemoveUntil(
             context,
@@ -255,6 +258,7 @@ class _emailloginState extends State<emaillogin> {
       }
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
+      print(e);
     }
   }
 }

@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:esportzzz/Main_Pages/profile_page.dart';
 import 'package:esportzzz/News_pages/newstile.dart';
-import 'package:esportzzz/admin_test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
-
-import '../Main_Pages/navbar.dart';
-import 'newsdetailpage.dart';
 
 class NewsHome extends StatefulWidget {
   @override
@@ -16,6 +13,7 @@ class NewsHome extends StatefulWidget {
 
 class _NewsHomeState extends State<NewsHome> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   ScrollController controller = ScrollController();
   late String _uid;
   _checkUserStatus() async {
@@ -31,8 +29,36 @@ class _NewsHomeState extends State<NewsHome> {
     _checkUserStatus();
   }
 
+  Widget safeArea() {
+    return SafeArea(
+      child: PaginateFirestore(
+        itemBuilderType: PaginateBuilderType.listView,
+        itemBuilder: (index, context, documentSnapshot) {
+          final data = documentSnapshot.data() as Map?;
+          return Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: new NewsTile(
+              title: data!['title'],
+              description: data['description'],
+              imgurl: data['imgurl'],
+              uid: _uid,
+              docid: documentSnapshot.id,
+              date: data['date'],
+              gamename: data['game_name'],
+              source: data['source'],
+            ),
+          );
+        },
+        query: FirebaseFirestore.instance.collection('newsdetails'),
+        isLive: true,
+        itemsPerPage: 4,
+      ),
+    );
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           title: Row(
             children: [
@@ -62,7 +88,7 @@ class _NewsHomeState extends State<NewsHome> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => AddPost(),
+                          builder: (_) => Profile_Page(),
                         ));
                   },
                   icon: Icon(
@@ -74,36 +100,20 @@ class _NewsHomeState extends State<NewsHome> {
               )
             ],
           ),
+<<<<<<< HEAD
 
           
+=======
+          backgroundColor: Color(0xff1f1a30),
+>>>>>>> 9cf855599b37cb54cb8e31bb4909414981e06a1a
           shadowColor: Color(0xff1f1a30),
-
-          // elevation: 15,
-          // shadowColor: Colors.grey[200],
         ),
         backgroundColor: Color(0xff1f1a30),
-        body: SafeArea(
-          child: PaginateFirestore(
-            itemBuilderType: PaginateBuilderType.listView,
-            itemBuilder: (index, context, documentSnapshot) {
-              final data = documentSnapshot.data() as Map?;
-              return Padding(
-                padding: const EdgeInsets.only(top: 12),
-                child: new NewsTile(
-                    title: data!['title'],
-                    description: data['description'],
-                    imgurl: data['imgurl'],
-                    uid: _uid,
-                    docid: documentSnapshot.id),
-              );
-            },
-            query: FirebaseFirestore.instance.collection('newsdetails'),
-            isLive: true,
-            itemsPerPage: 4,
-          ),
-        ));
+        body: safeArea());
   }
 }
+
+//Basic Build Model With List View 
 
 
 // StreamBuilder(

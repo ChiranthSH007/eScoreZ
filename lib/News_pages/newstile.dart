@@ -2,17 +2,24 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:esportzzz/News_pages/game_name_page.dart';
 import 'package:esportzzz/Score_Pages/matchdetailpage.dart';
 import 'package:esportzzz/News_pages/newsdetailpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class NewsTile extends StatefulWidget {
-  String title, description, imgurl, docid, uid;
+  String title, description, imgurl, docid, uid, gamename, source;
+  Timestamp date;
+
   NewsTile({
     Key? key,
+    required this.gamename,
+    required this.date,
+    required this.source,
     required this.uid,
     required this.imgurl,
     required this.docid,
@@ -29,6 +36,9 @@ class _NewsTileState extends State<NewsTile> {
   IconData _saveIcn = Icons.bookmark_outline;
   Color _likeClr = Colors.pinkAccent;
   IconData _likeIcn = Icons.favorite_outline;
+  late DateTime created_time, today_time;
+  late Duration diff_time;
+  var in_time;
 
   onGoBack(dynamic value) {
     _checkActionStatus();
@@ -42,6 +52,19 @@ class _NewsTileState extends State<NewsTile> {
     Map<String, dynamic>? data = doc.data();
     var saveCheckList = data?["SavedIDs"] ?? 0; // Default value if its null
     var likeCheckList = data?["LikeIDs"] ?? 0;
+    setState(() {
+      created_time = widget.date.toDate();
+      today_time = DateTime.now();
+      diff_time = today_time.difference(created_time);
+      if (diff_time.inDays >= 1) {
+        in_time = diff_time.inDays.toString() + " days ";
+      } else if (diff_time.inHours >= 1) {
+        in_time = diff_time.inHours.toString() + " hrs ";
+      } else if (diff_time.inMinutes >= 1) {
+        in_time = diff_time.inMinutes.toString() + "mins ";
+      }
+    });
+
     if (saveCheckList != 0) {
       if (saveCheckList.contains(widget.uid) == true) {
         setState(() {
@@ -198,13 +221,66 @@ class _NewsTileState extends State<NewsTile> {
                     children: [
                       Container(
                         // padding: const EdgeInsets.fromLTRB(1.0, 35.0, 0.0, 0.0),
-                        child: Text(
-                          "Valorant",
-                          style: TextStyle(
-                            color: Colors.purple[300],
-                            fontFamily: "Snes",
-                            fontSize: 15,
-                          ),
+                        child: Row(
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.05),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: widget.gamename,
+                                    style: GoogleFonts.raleway(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.purple[300]),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    gamedetail_page()));
+                                      },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: size.width * 0.02,
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.05),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: "Follow",
+                                    style: GoogleFonts.raleway(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {},
+                                  ),
+                                ],
+                              ),
+                            )
+                            // Text(
+                            //   "Follow",
+                            //   style: TextStyle(
+                            //     color: Colors.blue,
+                            //     fontFamily: "Snes",
+                            //     fontSize: 10,
+                            //   ),
+                            // ),
+                          ],
                         ),
                       ),
                       SizedBox(
@@ -235,37 +311,49 @@ class _NewsTileState extends State<NewsTile> {
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "24h | abcd.com",
-                    style: GoogleFonts.nunito(color: Colors.grey),
+                  Row(
+                    children: [
+                      Text(
+                        in_time.toString() + "ago | ",
+                        style: GoogleFonts.nunito(
+                            color: Colors.grey, fontSize: 12),
+                      ),
+                      Text(
+                        widget.source,
+                        style: GoogleFonts.nunito(
+                            color: Colors.grey, fontSize: 12),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: size.width * 0.36,
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      _likeAndDislike();
-                    },
-                    icon: Icon(
-                      _likeIcn,
-                      color: _likeClr,
-                    ),
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        _saveAndUnsave();
-                      },
-                      icon: Icon(
-                        _saveIcn,
-                        color: _saveClr,
-                      )),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.share,
-                      color: Colors.white,
-                    ),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          _likeAndDislike();
+                        },
+                        icon: Icon(
+                          _likeIcn,
+                          color: _likeClr,
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            _saveAndUnsave();
+                          },
+                          icon: Icon(
+                            _saveIcn,
+                            color: _saveClr,
+                          )),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.share,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),
