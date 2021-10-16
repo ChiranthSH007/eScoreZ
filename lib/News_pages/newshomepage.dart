@@ -100,12 +100,7 @@ class _NewsHomeState extends State<NewsHome> {
               )
             ],
           ),
-<<<<<<< HEAD
-
-          
-=======
           backgroundColor: Color(0xff1f1a30),
->>>>>>> 9cf855599b37cb54cb8e31bb4909414981e06a1a
           shadowColor: Color(0xff1f1a30),
         ),
         backgroundColor: Color(0xff1f1a30),
