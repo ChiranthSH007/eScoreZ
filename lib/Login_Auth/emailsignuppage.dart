@@ -1,5 +1,6 @@
 import 'package:esportzzz/Login_Auth/email_vrfy.dart';
 import 'package:esportzzz/Main_Pages/homepage.dart';
+import 'package:esportzzz/Score_Pages/matchdetailpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -324,6 +325,43 @@ class _emailsignuppageState extends State<emailsignuppage> {
                                   side: BorderSide(
                                     width: size.width * 0.004,
                                     color: Color(0xff0ef5e3),
+                                  ))),
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Separator(),
+                        Container(
+                          // padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                          child: Text(
+                            'OR',
+                            style: GoogleFonts.nunito(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: size.width * 0.045),
+                          ),
+                        ),
+                        ConstrainedBox(
+                          constraints: BoxConstraints.tightFor(
+                            width: size.width * 0.8,
+                            height: size.height * 0.06,
+                          ),
+                          child: ElevatedButton(
+                              onPressed: () {},
+                              child: Text(
+                                "SigunUp with Google",
+                                style: GoogleFonts.nunito(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.red,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: new BorderRadius.circular(
+                                          size.width * 0.5)),
+                                  side: BorderSide(
+                                    width: size.width * 0.004,
+                                    // color: Color(0xff0ef5e3),
                                   ))),
                         ),
                       ],
