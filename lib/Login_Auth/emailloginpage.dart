@@ -256,6 +256,9 @@ class _emailloginState extends State<emaillogin> {
             MaterialPageRoute(builder: (context) => HomePage()),
             (route) => false);
       }
+      // else{
+
+      // }
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
       print(e);

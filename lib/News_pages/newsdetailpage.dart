@@ -1,13 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NewsDetail extends StatefulWidget {
-  String title, description, imgurl, docid, uid;
+  String title, description, imgurl, docid, uid, source;
   NewsDetail({
     Key? key,
     required this.docid,
+    required this.source,
     required this.uid,
     required this.imgurl,
     required this.title,
@@ -19,6 +22,7 @@ class NewsDetail extends StatefulWidget {
 }
 
 class _NewsDetailState extends State<NewsDetail> {
+  late String share_link;
   Color _saveClr = Colors.white;
   IconData _saveIcn = Icons.bookmark_outline;
   Color _likeClr = Colors.pinkAccent;
@@ -47,6 +51,8 @@ class _NewsDetailState extends State<NewsDetail> {
         });
       }
     }
+
+    // await createFirstPostLink(widget.source);
   }
 
   _saveAndUnsave() async {
@@ -125,13 +131,52 @@ class _NewsDetailState extends State<NewsDetail> {
     }
   }
 
+  // Future<void> createFirstPostLink(String url) async {
+  //   final DynamicLinkParameters parameters = DynamicLinkParameters(
+  //     uriPrefix: 'https://esportzzz.page.link',
+  //     link: Uri.parse(url),
+  //     androidParameters: AndroidParameters(
+  //       packageName: 'com.example.esportzzz',
+  //     ),
+  //     // NOT ALL ARE REQUIRED ===== HERE AS AN EXAMPLE =====
+  //     // iosParameters: IosParameters(
+  //     //   bundleId: 'com.example.ios',
+  //     //   minimumVersion: '1.0.1',
+  //     //   appStoreId: '123456789',
+  //     // ),
+  //     // googleAnalyticsParameters: GoogleAnalyticsParameters(
+  //     //   campaign: 'example-promo',
+  //     //   medium: 'social',
+  //     //   source: 'orkut',
+  //     // ),
+  //     // itunesConnectAnalyticsParameters: ItunesConnectAnalyticsParameters(
+  //     //   providerToken: '123456',
+  //     //   campaignToken: 'example-promo',
+  //     // ),
+  //     // socialMetaTagParameters: SocialMetaTagParameters(
+  //     //   title: 'Example of a Dynamic Link',
+  //     //   description: 'This link works whether app is installed or not!',
+  //     // ),
+  //   );
+
+  //   final Uri dynamicUrl = await parameters.buildUrl();
+  //   setState(() {
+  //     share_link = dynamicUrl.toString();
+  //   });
+  // }
+
+  // Future<void> share() async {
+  //   await FlutterShare.share(
+  //       linkUrl: share_link,
+  //       chooserTitle: 'Example Chooser Title',
+  //       title: "Share, Post");
+  // }
+
   @override
   void initState() {
     super.initState();
     _checkActionStatus();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -209,14 +254,14 @@ class _NewsDetailState extends State<NewsDetail> {
                           _saveIcn,
                           color: _saveClr,
                         )),
-                    IconButton(
-                      onPressed: () {},
-                      iconSize: 28,
-                      icon: Icon(
-                        Icons.share,
-                        color: Colors.white,
-                      ),
-                    )
+                    // IconButton(
+                    //   onPressed: () {},
+                    //   iconSize: 28,
+                    //   icon: Icon(
+                    //     Icons.share,
+                    //     color: Colors.white,
+                    //   ),
+                    // )
                   ],
                 ),
               ),

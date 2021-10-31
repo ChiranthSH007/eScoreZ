@@ -6,8 +6,10 @@ import 'package:esportzzz/News_pages/game_name_page.dart';
 import 'package:esportzzz/Score_Pages/matchdetailpage.dart';
 import 'package:esportzzz/News_pages/newsdetailpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
@@ -32,9 +34,12 @@ class NewsTile extends StatefulWidget {
 }
 
 class _NewsTileState extends State<NewsTile> {
+  //late String share_link;
   Color _saveClr = Colors.white;
   IconData _saveIcn = Icons.bookmark_outline;
   Color _likeClr = Colors.pinkAccent;
+  Color _followClr = Colors.blue;
+  late String followTxt = "Follow";
   IconData _likeIcn = Icons.favorite_outline;
   late DateTime created_time, today_time;
   late Duration diff_time;
@@ -81,6 +86,7 @@ class _NewsTileState extends State<NewsTile> {
         });
       }
     }
+    //await createFirstPostLink(widget.source);
   }
 
   _saveAndUnsave() async {
@@ -159,6 +165,85 @@ class _NewsTileState extends State<NewsTile> {
     }
   }
 
+  _followAndUnfollow() async {
+    CollectionReference docref =
+        FirebaseFirestore.instance.collection("newsdetails");
+    var doc = await docref.doc(widget.docid).get();
+    Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+    var likeCheckList = data?["FollowIDs"] ?? 0;
+    if (likeCheckList == 0) {
+      await docref.doc(widget.uid).update({
+        "FollowIDs": FieldValue.arrayUnion([widget.uid])
+      });
+      setState(() {
+        followTxt = "Following";
+        _followClr = Colors.tealAccent;
+        _checkActionStatus();
+      });
+    } else {
+      if (likeCheckList.contains(widget.uid) == true) {
+        await docref.doc(widget.docid).update({
+          "FollowIDs": FieldValue.arrayRemove([widget.uid])
+        });
+        setState(() {
+          followTxt = "Follow";
+          _followClr = Colors.blue;
+          _checkActionStatus();
+        });
+      } else {
+        await docref.doc(widget.docid).update({
+          "FollowIDs": FieldValue.arrayUnion([widget.uid])
+        });
+        setState(() {
+          followTxt = "Following";
+          _followClr = Colors.tealAccent;
+          _checkActionStatus();
+        });
+      }
+    }
+  }
+
+  // Future<void> createFirstPostLink(String url) async {
+  //   final DynamicLinkParameters parameters = DynamicLinkParameters(
+  //     uriPrefix: 'https://esportzzz.page.link',
+  //     link: Uri.parse(url),
+  //     androidParameters: AndroidParameters(
+  //       packageName: 'com.example.esportzzz',
+  //     ),
+  //     // NOT ALL ARE REQUIRED ===== HERE AS AN EXAMPLE =====
+  //     // iosParameters: IosParameters(
+  //     //   bundleId: 'com.example.ios',
+  //     //   minimumVersion: '1.0.1',
+  //     //   appStoreId: '123456789',
+  //     // ),
+  //     // googleAnalyticsParameters: GoogleAnalyticsParameters(
+  //     //   campaign: 'example-promo',
+  //     //   medium: 'social',
+  //     //   source: 'orkut',
+  //     // ),
+  //     // itunesConnectAnalyticsParameters: ItunesConnectAnalyticsParameters(
+  //     //   providerToken: '123456',
+  //     //   campaignToken: 'example-promo',
+  //     // ),
+  //     // socialMetaTagParameters: SocialMetaTagParameters(
+  //     //   title: 'Example of a Dynamic Link',
+  //     //   description: 'This link works whether app is installed or not!',
+  //     // ),
+  //   );
+
+  //   final Uri dynamicUrl = await parameters.buildUrl();
+  //   setState(() {
+  //     share_link = dynamicUrl.toString();
+  //   });
+  // }
+
+  // Future<void> share() async {
+  //   await FlutterShare.share(
+  //       linkUrl: share_link,
+  //       chooserTitle: 'Example Chooser Title',
+  //       title: "Share, Post");
+  // }
+
   @override
   void initState() {
     _checkActionStatus();
@@ -178,6 +263,7 @@ class _NewsTileState extends State<NewsTile> {
                 title: widget.title,
                 description: widget.description,
                 imgurl: widget.imgurl,
+                source: widget.source,
               ),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) =>
@@ -223,31 +309,38 @@ class _NewsTileState extends State<NewsTile> {
                         // padding: const EdgeInsets.fromLTRB(1.0, 35.0, 0.0, 0.0),
                         child: Row(
                           children: [
-                            RichText(
-                              text: TextSpan(
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.05),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: widget.gamename,
-                                    style: GoogleFonts.raleway(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.purple[300]),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (_) =>
-                                                    gamedetail_page()));
-                                      },
-                                  ),
-                                ],
-                              ),
+                            // RichText(
+                            //   text: TextSpan(
+                            //     style: TextStyle(
+                            //         color: Colors.black,
+                            //         fontSize:
+                            //             MediaQuery.of(context).size.width *
+                            //                 0.05),
+                            //     children: <TextSpan>[
+                            //       TextSpan(
+                            //         text: widget.gamename,
+                            //         style: GoogleFonts.raleway(
+                            //             fontSize: 14,
+                            //             fontWeight: FontWeight.bold,
+                            //             color: Colors.purple[300]),
+                            //         recognizer: TapGestureRecognizer()
+                            //           ..onTap = () {
+                            //             Navigator.push(
+                            //                 context,
+                            //                 MaterialPageRoute(
+                            //                     builder: (_) =>
+                            //                         gamedetail_page()));
+                            //           },
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                            Text(
+                              widget.gamename,
+                              style: GoogleFonts.raleway(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.purple[300]),
                             ),
                             SizedBox(
                               width: size.width * 0.02,
@@ -261,13 +354,15 @@ class _NewsTileState extends State<NewsTile> {
                                             0.05),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: "Follow",
+                                    text: followTxt,
                                     style: GoogleFonts.raleway(
                                         fontSize: 10,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.blue),
+                                        color: _followClr),
                                     recognizer: TapGestureRecognizer()
-                                      ..onTap = () {},
+                                      ..onTap = () {
+                                        _followAndUnfollow();
+                                      },
                                   ),
                                 ],
                               ),
@@ -321,7 +416,7 @@ class _NewsTileState extends State<NewsTile> {
                             color: Colors.grey, fontSize: 12),
                       ),
                       Text(
-                        widget.source,
+                        "widget.source",
                         style: GoogleFonts.nunito(
                             color: Colors.grey, fontSize: 12),
                       ),
@@ -346,13 +441,15 @@ class _NewsTileState extends State<NewsTile> {
                             _saveIcn,
                             color: _saveClr,
                           )),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.share,
-                          color: Colors.white,
-                        ),
-                      ),
+                      // IconButton(
+                      //   onPressed: () {
+                      //     share();
+                      //   },
+                      //   icon: Icon(
+                      //     Icons.share,
+                      //     color: Colors.white,
+                      //   ),
+                      // ),
                     ],
                   )
                 ],
