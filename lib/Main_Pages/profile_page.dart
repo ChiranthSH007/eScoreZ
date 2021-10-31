@@ -1,4 +1,5 @@
 import 'package:esportzzz/Login_Auth/login_select_page.dart';
+import 'package:esportzzz/Main_Pages/editprofile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,6 +36,7 @@ class _Profile_PageState extends State<Profile_Page> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -107,6 +109,7 @@ class _Profile_PageState extends State<Profile_Page> {
   }
 
   Widget editprofilewid() {
+    Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -128,15 +131,30 @@ class _Profile_PageState extends State<Profile_Page> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Edit Profile",
-                  style: GoogleFonts.nunito(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: MediaQuery.of(context).size.width * 0.0475),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => EditProfile()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Color(0xff1f1a30),
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              new BorderRadius.circular(size.width * 0.5)),
+                      side: BorderSide(
+                        width: size.width * 0.004,
+                        color: Colors.tealAccent,
+                      )),
+                  child: Text(
+                    "Edit Profile",
+                    style: GoogleFonts.nunito(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: MediaQuery.of(context).size.width * 0.0475),
+                  ),
                 ),
                 Text(
-                  "Update Your Personal Information",
+                  "  Update Your Personal Information",
                   style: GoogleFonts.nunito(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -151,6 +169,7 @@ class _Profile_PageState extends State<Profile_Page> {
   }
 
   Widget signoutwid() {
+    Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () async {
         await FirebaseAuth.instance.signOut();
@@ -178,12 +197,25 @@ class _Profile_PageState extends State<Profile_Page> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Sign Out",
-                    style: GoogleFonts.nunito(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: MediaQuery.of(context).size.width * 0.0475)),
-                Text("Logut of Your Account",
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      primary: Color(0xff1f1a30),
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              new BorderRadius.circular(size.width * 0.5)),
+                      side: BorderSide(
+                        width: size.width * 0.004,
+                        color: Colors.tealAccent,
+                      )),
+                  child: Text("Sign Out",
+                      style: GoogleFonts.nunito(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize:
+                              MediaQuery.of(context).size.width * 0.0475)),
+                ),
+                Text(" Logut of Your Account",
                     style: GoogleFonts.nunito(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
