@@ -272,7 +272,7 @@ class _emailloginState extends State<emaillogin> {
     super.dispose();
   }
 
-  Future<UserCredential> signInWithGoogle() async {
+  signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -285,9 +285,16 @@ class _emailloginState extends State<emaillogin> {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    try {
+      // Once signed in, return the UserCredential
+      await FirebaseAuth.instance.signInWithCredential(credential).then(
+          (value) => Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+              (route) => false));
+    } catch (e) {
+      print(e);
+    }
   }
 
   _signinWithEmailPassword() async {
@@ -310,4 +317,13 @@ class _emailloginState extends State<emaillogin> {
       print(e);
     }
   }
+  // void click() {
+  //   signInWithGoogle().then((user) => {
+  //         this.User = user,
+  //         Navigator.pushAndRemoveUntil(
+  //             context,
+  //             MaterialPageRoute(builder: (_) => HomePage()),
+  //             (Route<dynamic> route) => false)
+  //       });
+  // }
 }

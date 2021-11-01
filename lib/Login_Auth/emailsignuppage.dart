@@ -5,8 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class emailsignuppage extends StatefulWidget {
   const emailsignuppage({Key? key}) : super(key: key);
@@ -330,7 +332,6 @@ class _emailsignuppageState extends State<emailsignuppage> {
                         SizedBox(
                           height: 20.0,
                         ),
-                        Separator(),
                         Container(
                           // padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
                           child: Text(
@@ -341,28 +342,20 @@ class _emailsignuppageState extends State<emailsignuppage> {
                                 fontSize: size.width * 0.045),
                           ),
                         ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
                         ConstrainedBox(
                           constraints: BoxConstraints.tightFor(
                             width: size.width * 0.8,
                             height: size.height * 0.06,
                           ),
-                          child: ElevatedButton(
-                              onPressed: () {},
-                              child: Text(
-                                "SigunUp with Google",
-                                style: GoogleFonts.nunito(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                  primary: Colors.red,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: new BorderRadius.circular(
-                                          size.width * 0.5)),
-                                  side: BorderSide(
-                                    width: size.width * 0.004,
-                                    // color: Color(0xff0ef5e3),
-                                  ))),
+                          child: SignInButton(
+                            Buttons.Google,
+                            onPressed: () {
+                              signInWithGoogle();
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -409,6 +402,28 @@ class _emailsignuppageState extends State<emailsignuppage> {
           backgroundColor: Colors.grey[400],
           textColor: Colors.black);
     }
+  }
+
+  signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential).then(
+        (value) => Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+            (route) => false));
   }
 
   void _register() async {
