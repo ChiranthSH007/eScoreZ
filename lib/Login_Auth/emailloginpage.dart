@@ -2,10 +2,13 @@ import 'dart:ui';
 
 import 'package:esportzzz/Login_Auth/forgotpasswordpage.dart';
 import 'package:esportzzz/Main_Pages/homepage.dart';
+import 'package:esportzzz/Score_Pages/matchdetailpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class emaillogin extends StatefulWidget {
   const emaillogin({Key? key}) : super(key: key);
@@ -33,10 +36,10 @@ class _emailloginState extends State<emaillogin> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: size.height * 0.05,
+                height: size.height * 0.02,
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                padding: EdgeInsets.fromLTRB(15.0, 100.0, 0.0, 0.0),
                 child: Text(
                   'Login',
                   style: GoogleFonts.nunito(
@@ -216,6 +219,34 @@ class _emailloginState extends State<emaillogin> {
                                   color: Color(0xff0ef5e3),
                                 ))),
                       ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Container(
+                        // padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                        child: Text(
+                          'OR',
+                          style: GoogleFonts.nunito(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: size.width * 0.045),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      ConstrainedBox(
+                        constraints: BoxConstraints.tightFor(
+                          width: size.width * 0.8,
+                          height: size.height * 0.06,
+                        ),
+                        child: SignInButton(
+                          Buttons.Google,
+                          onPressed: () {
+                            signInWithGoogle();
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -239,6 +270,32 @@ class _emailloginState extends State<emaillogin> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    try {
+      await FirebaseAuth.instance.signInWithCredential(credential).then(
+          (value) => Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+              (route) => false));
+    } catch (e) {
+      print(e);
+    }
   }
 
   _signinWithEmailPassword() async {

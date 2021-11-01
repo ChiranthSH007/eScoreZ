@@ -6,10 +6,8 @@ import 'package:esportzzz/News_pages/game_name_page.dart';
 import 'package:esportzzz/Score_Pages/matchdetailpage.dart';
 import 'package:esportzzz/News_pages/newsdetailpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_share/flutter_share.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
