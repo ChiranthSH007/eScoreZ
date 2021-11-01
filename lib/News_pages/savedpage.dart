@@ -96,6 +96,7 @@ class _SavedPageState extends State<SavedPage> {
                       padding: const EdgeInsets.only(top: 12),
                       child: new SavedNewsTile(
                           uid: _uid,
+                          source: data['source'],
                           title: data['title'],
                           description: data['description'],
                           imgurl: data['imgurl'],

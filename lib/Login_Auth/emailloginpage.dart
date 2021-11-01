@@ -285,8 +285,14 @@ class _emailloginState extends State<emaillogin> {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
+<<<<<<< HEAD
     try {
       // Once signed in, return the UserCredential
+=======
+
+    // Once signed in, return the UserCredential
+    try {
+>>>>>>> 8f86fe559679217d685346c36e4c795c24370268
       await FirebaseAuth.instance.signInWithCredential(credential).then(
           (value) => Navigator.pushAndRemoveUntil(
               context,
@@ -312,6 +318,9 @@ class _emailloginState extends State<emaillogin> {
             MaterialPageRoute(builder: (context) => HomePage()),
             (route) => false);
       }
+      // else{
+
+      // }
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
       print(e);

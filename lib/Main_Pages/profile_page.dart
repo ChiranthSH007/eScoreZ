@@ -16,6 +16,7 @@ class Profile_Page extends StatefulWidget {
 class _Profile_PageState extends State<Profile_Page> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late final String _uid, _uname, _uemail;
+  late String _proImglink;
 
   _checkUserStatus() async {
     final User? user = _auth.currentUser;
@@ -23,7 +24,9 @@ class _Profile_PageState extends State<Profile_Page> {
       _uid = user!.uid;
       _uname = user.displayName!;
       _uemail = user.email!;
-      print(_uid + _uemail + _uname);
+      _proImglink =
+          'https://media.istockphoto.com/vectors/male-face-silhouette-or-icon-man-avatar-profile-unknown-or-anonymous-vector-id1087531642?k=20&m=1087531642&s=612x612&w=0&h=D6OBNUY7ZxQTAHNVtL9mm2wbHb_dP6ogIsCCWCqiYQg=';
+      print(_uid + _uemail + _uname); //user.photoURL ??
     });
   }
 
@@ -63,7 +66,7 @@ class _Profile_PageState extends State<Profile_Page> {
                 child: CircleAvatar(
                   child: ClipOval(
                     child: Image.network(
-                      'https://variety.com/wp-content/uploads/2015/07/naruto_movie-lionsgate.jpg',
+                      _proImglink,
                       width: 150,
                       height: 150,
                       fit: BoxFit.cover,
@@ -198,7 +201,13 @@ class _Profile_PageState extends State<Profile_Page> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => Login_Select()),
+                        (route) => false);
+                  },
                   style: ElevatedButton.styleFrom(
                       primary: Color(0xff1f1a30),
                       shape: RoundedRectangleBorder(
